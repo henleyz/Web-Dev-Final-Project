@@ -2,11 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
 import NavBar from './Components/NavBar.js'
+import LibraryBlock from './Components/LibraryBlock.js'
 
 function App() {
   return (
   <ChakraProvider>
-    <NavBar></NavBar>
+    <LibraryBlock></LibraryBlock>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
