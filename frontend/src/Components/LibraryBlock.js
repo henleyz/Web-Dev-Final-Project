@@ -13,22 +13,22 @@ const LibraryBlock = (props) => {
   <Image
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
-    src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
+    src={props.image}
     alt='Caffe Latte'
   />
 
   <Stack>
     <CardBody>
-      <Heading size='md'>Oski Library</Heading>
+      <Heading size='md'>{props.name}</Heading>
 
       <Text py='2'>
-        Libary Descrioption "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      {props.description}
       </Text>
     </CardBody>
 
     <CardFooter>
       <Button variant='solid' colorScheme='blue'>
-        Buy Latte
+        vistit
       </Button>
     </CardFooter>
   </Stack>
