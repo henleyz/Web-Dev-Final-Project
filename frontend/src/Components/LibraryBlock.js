@@ -1,10 +1,10 @@
-import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 const LibraryBlock = (props) => {
   /* TODO */
 
   return (
-
+<Stack spacing={{ base: 1, md: 1 }}>
 <Card
   direction={{ base: 'column', sm: 'row' }}
   overflow='hidden'
@@ -19,11 +19,10 @@ const LibraryBlock = (props) => {
 
   <Stack>
     <CardBody>
-      <Heading size='md'>The perfect latte</Heading>
+      <Heading size='md'>Oski Library</Heading>
 
       <Text py='2'>
-        Caffè latte is a coffee beverage of Italian origin made with espresso
-        and steamed milk.
+        Libary Descrioption "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       </Text>
     </CardBody>
 
@@ -33,7 +32,8 @@ const LibraryBlock = (props) => {
       </Button>
     </CardFooter>
   </Stack>
-</Card>
+</Card></Stack>
 )
+
 }
 export default LibraryBlock;
