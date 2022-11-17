@@ -4,7 +4,7 @@ const LibraryBlock = (props) => {
   /* TODO */
 
   return (
-<Stack spacing={{ base: 1, md: 1 }}>
+<Stack padding={'5'}>
 <Card
   direction={{ base: 'column', sm: 'row' }}
   overflow='hidden'

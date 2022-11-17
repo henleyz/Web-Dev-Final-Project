@@ -32,7 +32,7 @@ export default function CallToActionWithAnnotation() {
             fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
             find library here <br />
-            <Text  as={'span'} color={'green.400'}>
+            <Text  as={'span'} color={'#3B7EA1'}>
               now
             </Text>
           </Heading>
