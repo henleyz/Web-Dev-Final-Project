@@ -7,16 +7,18 @@ import LibraryBlock from './Pages/LibraryFinder/Components/LibraryBlock.js'
 import LibraryHeading from './Pages/LibraryFinder/Components/LibraryHeading';
 import LibaryList from './Pages/LibraryFinder/Components/LibraryList';
 import FindLibraries from './Pages/LibraryFinder/FindLibraries';
+import SplitScreen from './Components/Homepage';
+import SignupCard from './Components/Signup';
 
 
 function App() {
   return (
     <ChakraProvider>
     <Router>
-    <NavBar />
     <Routes>
-        {/* <Route exact path='/'  element={<Another Page/>} /> */}
+        <Route exact path='/'  element={<SplitScreen />}/>
         <Route exact path='/libraries'  element={<FindLibraries />} />
+        <Route exact path='/login'  element={<SignupCard/>} />
     </Routes>
     </Router>
     </ChakraProvider>
