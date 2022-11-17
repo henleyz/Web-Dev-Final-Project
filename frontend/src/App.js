@@ -1,28 +1,24 @@
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react'
-import NavBar from './Components/NavBar.js'
+import { ChakraProvider, Box } from '@chakra-ui/react'
+import NavBar from './Pages/LibraryFinder/Components/NavBar.tsx'
+import LibraryBlock from './Pages/LibraryFinder/Components/LibraryBlock.js'
+import LibraryHeading from './Pages/LibraryFinder/Components/LibraryHeading';
+import LibaryList from './Pages/LibraryFinder/Components/LibraryList';
+import FindLibraries from './Pages/LibraryFinder/FindLibraries';
+
 
 function App() {
   return (
-  <ChakraProvider>
-    <NavBar></NavBar>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+    <Router>
+    <NavBar />
+    <Routes>
+        {/* <Route exact path='/'  element={<Another Page/>} /> */}
+        <Route exact path='/libraries'  element={<FindLibraries />} />
+    </Routes>
+    </Router>
     </ChakraProvider>
   );
   
