@@ -15,7 +15,7 @@ function App() {
     <Router>
     <NavBar />
     <Routes>
-        {/* <Route exact path='/'  element={<Home/>} /> */}
+        {/* <Route exact path='/'  element={<Another Page/>} /> */}
         <Route exact path='/libraries'  element={<FindLibraries />} />
     </Routes>
     </Router>
