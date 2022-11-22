@@ -1,7 +1,9 @@
 import NavBar from './Components/NavBar.tsx'
-import { ChakraProvider, Box } from '@chakra-ui/react'
+import { ChakraProvider, Box, Button } from '@chakra-ui/react'
 import LibraryHeading from './Components/LibraryHeading';
 import LibaryList from './Components/LibraryList';
+import Form from './Components/Form';
+import SlideEx from './Components/Slide';
 
 function FindLibraries() {
   return (

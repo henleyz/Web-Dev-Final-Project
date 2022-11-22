@@ -1,5 +1,12 @@
-import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
+import {   Accordion,Box,  
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon, Card,
+   CardHeader, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
+import CommentBox from './CommentBox.js'
+import {ChatIcon} from '@chakra-ui/icons'
 const LibraryBlock = (props) => {
   /* TODO */
 
@@ -31,8 +38,40 @@ const LibraryBlock = (props) => {
         vistit
       </Button>
     </CardFooter>
+    <Box display='flex' mt='2' alignItems='center'>
+          {Array(5)
+            .fill('')
+            .map((_, i) => (
+              <ChatIcon
+                key={i}
+                color={i < props.rating ? 'teal.500' : 'gray.300'}
+              />
+            ))}
+          <Box as='span' ml='2' color='gray.600' fontSize='sm'>
+            {props.reviewCount} reviews
+          </Box>
+          </Box>
   </Stack>
-</Card></Stack>
+</Card>
+<Accordion>
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box flex='1' textAlign='left'>
+          Reviews
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      <CommentBox postId={props.name} comments={props.comments} ></CommentBox>
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion>
+
+
+</Stack>
+
 )
 
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LibraryBlock from "./LibraryBlock";
 import {Button} from '@chakra-ui/react';
 import axios from "axios";
+import SlideEx from "./Slide";
 
 
 const LibaryList = () => {
@@ -42,6 +43,7 @@ const LibaryList = () => {
 
    return (
         <div>
+            <SlideEx></SlideEx>
              <Button margin='10' variant='solid' colorScheme='blue' onClick={getList}>Get Libaries</Button>
              {posts}
         </div>
