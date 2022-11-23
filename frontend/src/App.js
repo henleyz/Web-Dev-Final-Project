@@ -9,9 +9,11 @@ import LibaryList from './Pages/LibraryFinder/Components/LibraryList';
 import FindLibraries from './Pages/LibraryFinder/FindLibraries';
 import SplitScreen from './Components/Homepage';
 import SignupCard from './Components/Signup';
+import Library from './Pages/LibraryFinder/Library';
 
 
 function App() {
+
   return (
     <ChakraProvider>
     <Router>
@@ -19,6 +21,7 @@ function App() {
         <Route exact path='/'  element={<SplitScreen />}/>
         <Route exact path='/libraries'  element={<FindLibraries />} />
         <Route exact path='/login'  element={<SignupCard/>} />
+        <Route exact path='/library/:id' element={<Library/>}/>
     </Routes>
     </Router>
     </ChakraProvider>

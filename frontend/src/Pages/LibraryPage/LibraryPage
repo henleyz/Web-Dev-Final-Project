@@ -1,0 +1,31 @@
+import {Link} from 'react-router-dom';
+
+const LibaryPage = ({ match, location }) => {
+    const { params: { userId } } = match;
+  
+    return (
+      <>
+        <p>
+          <strong>User ID: </strong>
+          {userId}
+        </p>
+        <p>
+          <strong>User Name: </strong>
+          {users[userId - 1].name}
+        </p>
+      </>
+    );
+  };
+ export default LibaryPage;
+
+const users = [
+    {
+      name: `Param`,
+    },
+    {
+      name: `Vennila`,
+    },
+    {
+      name: `Afrin`,
+    },
+  ];

@@ -1,13 +1,14 @@
-import {   Accordion,Box,  
+import {   Accordion,Box,  Link,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  AccordionIcon, Card,
+  AccordionIcon, Card, Progress,
    CardHeader, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import CommentBox from './CommentBox.js'
 import {ChatIcon} from '@chakra-ui/icons'
 const LibraryBlock = (props) => {
+  let hrefLink = '/library/' + props.name;
   /* TODO */
 
   return (
@@ -31,12 +32,14 @@ const LibraryBlock = (props) => {
       <Text py='2'>
       {props.description}
       </Text>
+      <Progress  value={64} />
     </CardBody>
 
-    <CardFooter>
+    <CardFooter><Link href={hrefLink}>
       <Button variant='solid' colorScheme='blue'>
         vistit
-      </Button>
+      </Button></Link>
+      
     </CardFooter>
     <Box display='flex' mt='2' alignItems='center'>
           {Array(5)
