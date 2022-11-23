@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import LibraryBlock from "./LibraryBlock";
-import {Button} from '@chakra-ui/react';
+import {Button, Box} from '@chakra-ui/react';
 import axios from "axios";
 import SlideEx from "./Slide";
 
@@ -9,6 +9,10 @@ const LibaryList = () => {
     /* TODO: Declare a new state variable to keep track of the blocks on your Blockstagram feed! */
     // Refer to Hint 2 for more help!
     const [list, setList] = useState([]);
+
+    useEffect(() => {
+        //getList()
+     });
 
     /* Use the map() function to render multiple Blocks! */
      // TODO: edit this variable
@@ -38,6 +42,8 @@ const LibaryList = () => {
             update(library)
         }
     }
+
+    
     //)
 
 
@@ -45,7 +51,7 @@ const LibaryList = () => {
         <div>
             <SlideEx></SlideEx>
              <Button margin='10' variant='solid' colorScheme='blue' onClick={getList}>Get Libaries</Button>
-             {posts}
+             <Box margin="20" maxWidth="1500px">{posts}</Box>
         </div>
 
     );

@@ -12,13 +12,15 @@ const LibraryBlock = (props) => {
   /* TODO */
 
   return (
-<Stack padding={'5'}>
+<Stack padding={'5'} maxHeight="300px">
 <Card
   direction={{ base: 'column', sm: 'row' }}
   overflow='hidden'
   variant='outline'
 >
-  <Image
+  <Image //pictrue
+    minH="200px"
+    minW="200px"
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
     src={props.image}
@@ -29,7 +31,7 @@ const LibraryBlock = (props) => {
     <CardBody>
       <Heading size='md'>{props.name}</Heading>
 
-      <Text py='2'>
+      <Text py='2'> 
       {props.description}
       </Text>
       <Progress  value={64} />
@@ -56,21 +58,7 @@ const LibraryBlock = (props) => {
           </Box>
   </Stack>
 </Card>
-<Accordion>
-  <AccordionItem>
-    <h2>
-      <AccordionButton>
-        <Box flex='1' textAlign='left'>
-          Reviews
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4}>
-      <CommentBox postId={props.name} comments={props.comments} ></CommentBox>
-    </AccordionPanel>
-  </AccordionItem>
-  </Accordion>
+
 
 
 </Stack>
