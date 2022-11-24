@@ -2,7 +2,7 @@ import { useDisclosure, Button, Slide, Box, Lorem} from "@chakra-ui/react"
 import Form from "./Form"
 
 
-function SlideEx() {
+function SlideEx(props) {
     const { isOpen, onToggle } = useDisclosure()
   
     return (
@@ -19,7 +19,7 @@ function SlideEx() {
             height='100%'
             width='33%'
           >
-            <Form func={onToggle}></Form>
+            <Form isLoggedIn={props.isLoggedIn} loginValues={props.loginvalues} func={onToggle} apply={props.apply}></Form>
           </Box>
         </Slide>
       </>

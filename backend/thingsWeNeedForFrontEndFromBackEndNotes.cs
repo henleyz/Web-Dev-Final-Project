@@ -15,6 +15,7 @@ there should be another api that returns library object with its details given a
 and library object should have 
 {
     link to library image
+    library address
     library coordinates (so i can put a google map api thingy with marker)
     library crowd meter
     library noise meter

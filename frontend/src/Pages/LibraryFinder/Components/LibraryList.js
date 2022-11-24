@@ -9,6 +9,12 @@ const LibaryList = () => {
     /* TODO: Declare a new state variable to keep track of the blocks on your Blockstagram feed! */
     // Refer to Hint 2 for more help!
     const [list, setList] = useState([]);
+    const [loud, setLoud] = useState(50);
+    const [open, setOpen] = useState(true);
+    const [distance, setDistance] = useState(100)
+    const [busy, setBusy] = useState(100);
+    const [lat, setLat] = useState(null);
+    const [lng, setLng] = useState(null);
 
     useEffect(() => {
         //getList()
@@ -21,9 +27,11 @@ const LibaryList = () => {
         setList(posts => [props, ...posts]);
     }
 
-    const posts = list.map((item) => <LibraryBlock key="{item}" name={item.name} description={item.description} image={item.image}></LibraryBlock>);
+    var posts = list.map((i) => <LibraryBlock key={i.name} name={i.name} description={i.description} image={i.image}></LibraryBlock>);
 
-    const getList = () => {
+    const getList = (open, busy, distance, loud, lat, lng) => {
+        console.log("oskkkiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+        console.log(""+ open + busy +  distance + loud + lat + lng)
         //axios.get(`backendShit`, {timeout: 10 * 1000}).then((body) => {
 		//console.log("Received response from server for Q2: ", body.data);
 		//const libraries = body.data;
@@ -43,16 +51,25 @@ const LibaryList = () => {
         }
     }
 
-    
-    //)
+    const getListHelper = () => {
+        getList(open, busy, distance, loud, lat, lng)
+    }
+    function updateSearchParameters(o, b, d, l, lat, lng){
+        setOpen(o);
+        setBusy(b);
+        setDistance(d);
+        setLoud(l);
+        setLat(lat);
+        setLng(lng);
+    }
 
 
    return (
-        <div>
-            <SlideEx></SlideEx>
-             <Button margin='10' variant='solid' colorScheme='blue' onClick={getList}>Get Libaries</Button>
-             <Box margin="20" maxWidth="1500px">{posts}</Box>
-        </div>
+        <Box margin="20">
+            <SlideEx apply={updateSearchParameters}></SlideEx>
+             <Button margin='10' variant='solid' colorScheme='blue' onClick={getListHelper}>Get Libaries</Button>
+             <Box  maxWidth="1500px">{posts}</Box>
+        </Box>
 
     );
 }

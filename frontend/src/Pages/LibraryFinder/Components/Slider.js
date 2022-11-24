@@ -8,7 +8,7 @@ import {
   } from '@chakra-ui/react'
 import {useState} from 'react'
 
-function SliderMarkExample() {
+function SliderMarkExample(props) {
     const [sliderValue, setSliderValue] = useState(50)
   
     const labelStyles = {
@@ -16,10 +16,14 @@ function SliderMarkExample() {
       ml: '-2.5',
       fontSize: 'sm',
     }
+
+    function returnValue(){
+      props.returnValue(sliderValue);
+    }
   
     return (
       <Box pt={6} pb={2}>
-        <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)}>
+        <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)} onChangeEnd={returnValue}>
           <SliderMark value={25} {...labelStyles}>
             25%
           </SliderMark>

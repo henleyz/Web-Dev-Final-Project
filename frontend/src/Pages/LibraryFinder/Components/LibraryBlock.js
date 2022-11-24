@@ -8,19 +8,31 @@ import { Text } from '@chakra-ui/react'
 import CommentBox from './CommentBox.js'
 import {ChatIcon} from '@chakra-ui/icons'
 const LibraryBlock = (props) => {
+
+  
+
+function getLibraryDetailsFromName(name){
+    props = name;
+}
+
+getLibraryDetailsFromName(props)
+
   let hrefLink = '/library/' + props.name;
   /* TODO */
 
   return (
-<Stack padding={'5'} maxHeight="300px">
-<Card
+<Stack padding={'5'} mineight="300px">
+<Card 
   direction={{ base: 'column', sm: 'row' }}
   overflow='hidden'
   variant='outline'
+  minH="300px"
+  maxH="300px"
 >
   <Image //pictrue
-    minH="200px"
-    minW="200px"
+    minH="300px"
+    minW="300px"
+    maxH = "300px"
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
     src={props.image}
@@ -30,7 +42,7 @@ const LibraryBlock = (props) => {
   <Stack>
     <CardBody>
       <Heading size='md'>{props.name}</Heading>
-
+      {props.hours}
       <Text py='2'> 
       {props.description}
       </Text>
