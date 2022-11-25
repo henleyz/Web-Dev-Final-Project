@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from './Components/NavBar.tsx';
+import dummyLibraryList from './dummyLibraryList';
 
 import {
     Box,
@@ -21,12 +22,29 @@ import {
     ListItem,
   } from '@chakra-ui/react';
   
+const dummyList = {
+    moffit: {
+        image: "https://upload.wikimedia.org/wikipedia/commons/5/50/Moffitt_exterior.JPG"
+        ,description: "The James K. Moffitt Undergraduate Library, simply known as Moffitt Library, is a library situated at the crossroads of the University of California, Berkeley, designed by American activist John Carl Warnecke in the late 1960s as a cutting-edge library for undergraduates."
+        ,hours: "8am  to 10 pm"
+    }
+,
+oskilibrary: {
+      image: "https://upload.wikimedia.org/wikipedia/commons/5/50/Moffitt_exterior.JPG"
+      ,description: "The James K. Moffitt Undergraduate Library, simply known as Moffitt Library, is a library situated at the crossroads of the University of California, Berkeley, designed by American activist John Carl Warnecke in the late 1960s as a cutting-edge library for undergraduates."
+      ,hours: "8am  to 10 pm"
+  }
+}
+
 
 
 const Library = () => {
 
     const { id } = useParams();
-
+    const props = dummyList[id];
+    if (props.image === undefined) {
+      props.image = "https://upload.wikimedia.org/wikipedia/commons/5/50/Moffitt_exterior.JPG"
+    }
     
     return(
         <div>
@@ -40,8 +58,7 @@ const Library = () => {
             <Image
               rounded={'md'}
               alt={'product image'}
-              src={
-                'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODE1MDl8MHwxfGFsbHx8fHx8fHx8fDE2Mzg5MzY2MzE&ixlib=rb-1.2.1&q=80&w=1080'
+              src={ props.image
               }
               fit={'cover'}
               align={'center'}
@@ -61,7 +78,7 @@ const Library = () => {
                 color={useColorModeValue('gray.900', 'gray.400')}
                 fontWeight={300}
                 fontSize={'2xl'}>
-                $350.00 USD
+                {props.hours}
               </Text>
             </Box>
   

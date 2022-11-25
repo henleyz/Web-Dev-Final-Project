@@ -17,7 +17,7 @@ function getLibraryDetailsFromName(name){
 
 getLibraryDetailsFromName(props)
 
-  let hrefLink = '/library/' + props.name;
+  let hrefLink = '/library/' + props.name.replace(/ /g,'');
   /* TODO */
 
   return (

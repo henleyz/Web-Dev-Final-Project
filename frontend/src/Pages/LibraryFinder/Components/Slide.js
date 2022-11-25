@@ -13,13 +13,13 @@ function SlideEx(props) {
             p='40px'
             color='black'
             mt='0'
-            bg='teal.500'
+            bg='dodgerblue'
             rounded='md'
             shadow='md'
             height='100%'
             width='33%'
           >
-            <Form isLoggedIn={props.isLoggedIn} loginValues={props.loginvalues} func={onToggle} apply={props.apply}></Form>
+            <Form isLoggedIn={props.isLoggedIn} data={props.data} func={onToggle} apply={props.apply}></Form>
           </Box>
         </Slide>
       </>

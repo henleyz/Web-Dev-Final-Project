@@ -1,7 +1,7 @@
 import { Box, Button, Heading,Checkbox } from "@chakra-ui/react";
 import SliderMarkExample from "./Slider";
 import location from "./location";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import onToggle from './Slide'
 
 
@@ -13,10 +13,18 @@ const [loud, setLoud] = useState(100);
 const [distance, setDistance] = useState(100)
 const [busy, setBusy] = useState(100);
 const [open, setOpen] = useState(true);
-
-if(props.isLoggedIn){
-    updateSearchParameters(props.loginValues.open, props.loginValues.busy, props.loginValues.distance, props.loginValues.loud)
-}
+console.log(props.data)
+useEffect(()=>{
+    updateSearchParameters(
+        props.data.open, 
+        props.data.busy, 
+        props.data.distance, 
+        props.data.loud)
+    // do stuff here...
+}, [])
+//if(props.isLoggedIn){
+    
+//}
 
 function updateSearchParameters(o, b, d, l){
     setOpen(o);
@@ -26,8 +34,11 @@ function updateSearchParameters(o, b, d, l){
 }
 
     const applyAndClose = () =>{
-         props.func()
-         props.apply(open,busy,distance,loud,lat,lng)
+        props.apply(open,busy,distance,loud,lat,lng)
+        if (typeof props.func === 'function') {
+            props.func()
+        }
+         
     }
     const getLocation = () => {
         if(!navigator.geolocation){setStatus("not supported")} else{
@@ -40,7 +51,7 @@ function updateSearchParameters(o, b, d, l){
         }, () => {setStatus('unable to get location');});}};
 
     return(
-       <Box margin={2}>
+       <Box margin={0}>
         <Button onClick={getLocation}>get location</Button>
         <Heading>location</Heading>
         <p>{status}</p>
