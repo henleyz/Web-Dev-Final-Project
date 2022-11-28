@@ -3,7 +3,7 @@ import {   Accordion,Box,  Link,
   AccordionButton,
   AccordionPanel,
   AccordionIcon, Card, Progress,
-   CardHeader, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
+   CardHeader, CircularProgress, CircularProgressLabel, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import CommentBox from './CommentBox.js'
 import {ChatIcon} from '@chakra-ui/icons'
@@ -47,6 +47,14 @@ getLibraryDetailsFromName(props)
       {props.description}
       </Text>
       <Progress  value={64} />
+      loudness
+      <CircularProgress value={40} color='green.400'>
+  <CircularProgressLabel>40%</CircularProgressLabel>
+</CircularProgress>
+busyness
+<CircularProgress value={40} color='green.400'>
+  <CircularProgressLabel>40%</CircularProgressLabel>
+</CircularProgress>
     </CardBody>
 
     <CardFooter><Link href={hrefLink}>
