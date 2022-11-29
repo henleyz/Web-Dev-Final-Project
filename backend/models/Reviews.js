@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const ReviewSchema = mongoose.Schema({
+    library: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
