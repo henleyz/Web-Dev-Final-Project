@@ -17,7 +17,7 @@ const router = express.Router();
 
 //adding libraries
 const createLibrary = async () => {
-let kresge = await Library.findOne({name: "kresge"});
+let kresge = await Library.findOne({name: "kresge"})
 if (!kresge) {
     kresge = new Library({
         name: "kresge",
@@ -33,7 +33,7 @@ if (!kresge) {
     kresge.save()
 }
 // adding more libraries
-let moffit = await Library.findOne({name: "moffit"});
+let moffit = await Library.findOne({name: "moffit"})
 if (!moffit) {
     moffit = new Library({
         name: "moffit",
@@ -48,7 +48,7 @@ if (!moffit) {
     })
     moffit.save()
 }
-let mainstack = await Library.findOne({name: "mainstack"});
+let mainstack = await Library.findOne({name: "mainstack"})
 if (!mainstack) {
     mainstack = new Library({
         name:"mainstack",
@@ -64,7 +64,7 @@ if (!mainstack) {
     mainstack.save()
 }
 
-let business = await Library.findOne({name: "business"});
+let business = await Library.findOne({name: "business"})
 if (!business) {
     business = new Library({
         name:"business",
