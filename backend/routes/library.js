@@ -2,6 +2,7 @@ const Library = require("../models/Library")
 const express = require("express");
 const router = express.Router();
 
+
 // let template = new Library({
 //     name:,
 //     open_time:,
@@ -82,6 +83,21 @@ if (!business) {
 
 createLibrary();
 
+let mainstack = new Library({
+    name:"mainstack",
+    open_time:900,
+    close_time:200,
+    latitude:37.87235256259323,
+    longitude:-122.25916374878575,
+    short_description:"mainstack A basement style library.",
+    long_description:"The David Pierpont Gardner Stacks is a large multi-level space housing 2.3 million volumes, of the approximately 4.5 million volumes that constitute Doe Library’s research collection. Access to the Main (Gardner) Stacks is via Moffitt Library or Doe Library. Open tables, study carrels, and group study rooms are arranged throughout the floors and serve as a primary study area for UC Berkeley students and faculty.",
+    image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-Doe-05041_2.jpg.webp?itok=A4wveHVs",
+    image2_link:"https://live.staticflickr.com/7582/28551141222_5a4227da65_b.jpg"
+})
+mainstack.save()
+
+
+
 router.get("/", async (req, res) => {
     const libname = req.query.libname
     try{
@@ -96,4 +112,5 @@ router.get("/", async (req, res) => {
         res.status(500).send("Error in Fetching");
     }
 })
+
 module.exports = router
