@@ -100,10 +100,11 @@ mainstack.save()
 
 router.get("/", async (req, res) => {
     const libname = req.query.libname
+    console.log(libname)
     try{
         let library = await Library.findOne({name: libname})
         if (!library) {
-            return res.status(400).json({msg: "Library not Exist"});
+            return res.status(404).json({msg: "Library not Exist"});
         } else {
             return res.send(JSON.stringify(library))
         }

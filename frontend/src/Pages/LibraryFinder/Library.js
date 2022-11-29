@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { Component, useState, useEffect } from "react";
+import { useParams,  } from "react-router-dom";
 import NavBar from './Components/NavBar.tsx';
 import dummyLibraryList from './dummyLibraryList';
 
@@ -42,15 +42,21 @@ oskilibrary: {
 
 
 const Library = () => {
+    const [loading, setloading] = useState(true);
+    useEffect(()=>{getData()
+
+    }, [])
 
     const { id } = useParams();
-    const [data, SetData] = useState();
+    const [props, SetData] = useState();
+    const getData = () =>{
+          axios.get("http://localhost:3000/library/", {params:{libname:"kresge"}}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
 
-    axios.get("http://localhost:3000/library/", {params:{name:"moffitt"}}).then((body) => (SetData(body))).catch((error) => console.log(error))
+    }
     
-    var props = dummyList[id];
+  
 
-    return(
+    const content = loading ?  <div>loading </div> :
         <div>
         <NavBar></NavBar>
         
@@ -63,7 +69,8 @@ const Library = () => {
             <Image
               rounded={'md'}
               alt={'product image'}
-              src={ props.image
+              src={ props.image1_link
+
               }
               fit={'cover'}
               align={'center'}
@@ -80,7 +87,7 @@ const Library = () => {
                 {id}
               </Heading>
               <Text
-                color={useColorModeValue('gray.900', 'gray.400')}
+                color={'gray.900'}
                 fontWeight={300}
                 fontSize={'2xl'}>
                 {props.hours}
@@ -92,12 +99,12 @@ const Library = () => {
               direction={'column'}
               divider={
                 <StackDivider
-                  borderColor={useColorModeValue('gray.200', 'gray.600')}
+                  borderColor={'gray.200'}
                 />
               }>
               <VStack spacing={{ base: 4, sm: 6 }}>
                 <Text
-                  color={useColorModeValue('gray.500', 'gray.400')}
+                  color={'gray.500'}
                   fontSize={'2xl'}
                   fontWeight={'300'}>
                   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
@@ -113,7 +120,7 @@ const Library = () => {
               <Box>
                 <Text
                   fontSize={{ base: '16px', lg: '18px' }}
-                  color={useColorModeValue('yellow.500', 'yellow.300')}
+                  color={'yellow.500'}
                   fontWeight={'500'}
                   textTransform={'uppercase'}
                   mb={'4'}>
@@ -136,7 +143,7 @@ const Library = () => {
               <Box>
                 <Text
                   fontSize={{ base: '16px', lg: '18px' }}
-                  color={useColorModeValue('yellow.500', 'yellow.300')}
+                  color={'yellow.500'}
                   fontWeight={'500'}
                   textTransform={'uppercase'}
                   mb={'4'}>
@@ -197,8 +204,8 @@ const Library = () => {
               mt={8}
               size={'lg'}
               py={'7'}
-              bg={useColorModeValue('gray.900', 'gray.50')}
-              color={useColorModeValue('white', 'gray.900')}
+              bg={'-moz-initial'}
+              color={'white'}
               textTransform={'uppercase'}
               _hover={{
                 transform: 'translateY(2px)',
@@ -215,7 +222,7 @@ const Library = () => {
 <Reviews name={id}></Reviews>
       </Container>
          </div>
-    )
+    return <div>{content} </div>
     };
 
 export default Library;
