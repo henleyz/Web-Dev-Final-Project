@@ -2,11 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const InitiateMongoServer = require("./config/db");
 const user = require("./routes/user");
+const cors = require('cors');
 
 InitiateMongoServer();
 const app = express();
 const PORT = process.env.PORT || 3000
-
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
