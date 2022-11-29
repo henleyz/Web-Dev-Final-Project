@@ -36,10 +36,17 @@ export default function SignupCard() {
   const [username, setUsername] = useState(false);
 
 
+  function postSignupInfo(){
+
+    console.log(username +  email + password)
+    axios.post("http://localhost:3000/user/signup", {username: username, email: email, password:password}).then(window.open("/libraries","_self"))
+    
+  }
+  
   function postLoginInfo(){
 
     console.log(username +  email + password)
-    axios.post("http://localhost:3000/user/signup", {username: username, email: email, password:password}).then()
+    axios.post("http://localhost:3000/user/login", {username: username, email: email, password:password}).then(window.open("/libraries","_self"))
   }
 
   return (
@@ -110,7 +117,7 @@ export default function SignupCard() {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button onClick={postLoginInfo}
+              <Button onClick={postSignupInfo}
                 loadingText="Submitting"
                 size="lg"
                 bg={'blue.400'}
@@ -119,6 +126,16 @@ export default function SignupCard() {
                   bg: 'blue.500',
                 }}>
                 Sign up
+              </Button>
+              <Button onClick={postLoginInfo}
+                loadingText="Submitting"
+                size="lg"
+                bg={'gray.200'}
+                color={'white'}
+                _hover={{
+                  bg: 'gray.500',
+                }}>
+                login
               </Button>
             </Stack>
             <Stack pt={6}>

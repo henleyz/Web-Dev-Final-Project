@@ -21,6 +21,8 @@ import {
     List,
     ListItem,
   } from '@chakra-ui/react';
+import Reviews from "./Reviews";
+import ReviewBlock from "./ReviewBlock";
   
 const dummyList = {
     moffit: {
@@ -41,7 +43,7 @@ oskilibrary: {
 const Library = () => {
 
     const { id } = useParams();
-    const props = dummyList[id];
+    const props = dummyList["moffit"];
     if (props.image === undefined) {
       props.image = "https://upload.wikimedia.org/wikipedia/commons/5/50/Moffitt_exterior.JPG"
     }
@@ -49,6 +51,7 @@ const Library = () => {
     return(
         <div>
         <NavBar></NavBar>
+        
         <Container maxW={'7xl'}>
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
@@ -207,6 +210,7 @@ const Library = () => {
             </Stack>
           </Stack>
         </SimpleGrid>
+<Reviews></Reviews>
       </Container>
          </div>
     )
