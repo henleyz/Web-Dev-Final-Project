@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", user)
 app.use("/library", library)
-app.use("/review,", review)
+app.use("/review", review)
 
 app.get("/", (req, res) => {
     res.json({ message: "API Working" });
