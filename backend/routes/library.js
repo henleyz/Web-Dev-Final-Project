@@ -66,6 +66,8 @@ let business = new Library({
     image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-BUSINESS-02.jpg.webp?itok=9F1P2hpI",
     image2_link:"https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=e9vAYNJIaQmaX9iUA-1myQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=269.92892&pitch=0&thumbfov=100"
 })
+business.save()
+
 router.get("/", async (req, res) => {
     const {name} = req.body
     try{

@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
         res.status(500).send("Cannot get the reviews");
     }
 })
+
 router.post("/post", async (req, res) => {
     const {library, title, body, rate} = req.body; // Create a review and save into the db
     if(title == ''|| body == ''){
