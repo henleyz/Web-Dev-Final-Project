@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from './Components/NavBar.tsx';
 import dummyLibraryList from './dummyLibraryList';
@@ -23,6 +23,7 @@ import {
   } from '@chakra-ui/react';
 import Reviews from "./Reviews";
 import ReviewBlock from "./ReviewBlock";
+import axios from "axios";
   
 const dummyList = {
     moffit: {
@@ -43,11 +44,12 @@ oskilibrary: {
 const Library = () => {
 
     const { id } = useParams();
-    const props = dummyList[id];
-    if (props.image === undefined) {
-      props.image = "https://upload.wikimedia.org/wikipedia/commons/5/50/Moffitt_exterior.JPG"
-    }
+    const [data, SetData] = useState();
+
+    axios.get("http://localhost:3000/library/", {params:{name:"moffitt"}}).then((body) => (SetData(body))).catch((error) => console.log(error))
     
+    var props = dummyList[id];
+
     return(
         <div>
         <NavBar></NavBar>
