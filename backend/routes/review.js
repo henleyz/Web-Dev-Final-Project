@@ -47,7 +47,7 @@ router.post("/post", async (req, res) => {
             {name: library},
             {
             $inc: {total_reviews: 1, total_rate: rate},
-            $set: {rating:((lib.total_rate + rate)/(lib.total_reviews + 1)).toFixed(2)}})
+            $set: {rating:((lib.total_rate + rate)/(lib.total_reviews + 1)).toFixed(1)}})
         return res.send(JSON.stringify(review));
     } catch(e) {
         console.log(e);

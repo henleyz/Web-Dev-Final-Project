@@ -5,7 +5,6 @@ const user = require("./routes/user");
 const cors = require('cors');
 const library = require("./routes/library");
 const review = require("./routes/review");
-const clear = require("./clearDB");
 
 InitiateMongoServer();
 const app = express();
@@ -17,6 +16,7 @@ app.use("/library", library)
 app.use("/review", review)
 
 // Comment out when you don't want to clear the database
+// const clear = require("./clearDB");
 // app.use("/clearDB", clear)
 
 app.get("/", (req, res) => {
