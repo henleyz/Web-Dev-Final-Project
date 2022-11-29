@@ -19,7 +19,6 @@ router.post("/signup", async (req, res) => {
             email,
             password
         })
-
         const salt = await bcrypt.genSalt(10); // generate a random number and insert before the password
         user.password = await bcrypt.hash(password, salt) // hash user's pass word for better security
 
