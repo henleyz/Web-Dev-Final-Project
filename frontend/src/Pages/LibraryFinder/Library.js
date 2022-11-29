@@ -43,7 +43,7 @@ oskilibrary: {
 const Library = () => {
 
     const { id } = useParams();
-    const props = dummyList["moffit"];
+    const props = dummyList[id];
     if (props.image === undefined) {
       props.image = "https://upload.wikimedia.org/wikipedia/commons/5/50/Moffitt_exterior.JPG"
     }
@@ -210,7 +210,7 @@ const Library = () => {
             </Stack>
           </Stack>
         </SimpleGrid>
-<Reviews></Reviews>
+<Reviews name={id}></Reviews>
       </Container>
          </div>
     )
