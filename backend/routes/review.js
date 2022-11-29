@@ -9,7 +9,7 @@ app.use(express.json()) // To parse the incoming requests with JSON payloads
 
 
 router.get("/", async (req, res) => {
-    console.log(req.query.library);
+    console.log("Getting review from " + req.query.library);
     const library = req.query.library;
 
     try{
@@ -27,7 +27,7 @@ router.post("/post", async (req, res) => {
         console.log("empty review")
         return null;
     } 
-    console.log(req.body)
+    console.log("Posting review to " + library)
     try{
         let review = new Review({
             library: library,
@@ -42,14 +42,12 @@ router.post("/post", async (req, res) => {
 
         review.save()
 
-        let lib = await Library.findOne({name: library});
-        console.log(JSON.stringify(lib))
-        Library.updateOne(
+        let lib = await Library.findOne({name: library})
+        await Library.updateOne(
             {name: library},
-            {$inc: {total_rate: {rate}}}, 
-            {$inc: {total_reviews: 1}},
-            {$set: {rating:((lib?.total_rate + rate)/(lib?.total_reviews + 1)).toFixed(1)}});
-        
+            {
+            $inc: {total_reviews: 1, total_rate: rate},
+            $set: {rating:((lib.total_rate + rate)/(lib.total_reviews + 1)).toFixed(1)}})
         return res.send(JSON.stringify(review));
     } catch(e) {
         console.log(e);
