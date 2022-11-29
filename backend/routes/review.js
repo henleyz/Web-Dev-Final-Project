@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     const {library} = req.body
     try{
-        let reviews = await Review.find({library}).limit(10).sort({createdAt: -1})
+        let reviews = await Review.find({library}).limit(10).sort({createdAt: -1}) // Return a list of latest 10 reviews corresponding to this library
         res.send(JSON.stringify(reviews))
     } catch(e){
         console.log(e);
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     }
 })
 router.post("/post", async (req, res) => {
-    const {library, title, body, rate} = req.body;
+    const {library, title, body, rate} = req.body; // Create a review and save into the db
     try{
         let review = new Review({
             library: library,
