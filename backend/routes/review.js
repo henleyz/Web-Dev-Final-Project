@@ -1,4 +1,5 @@
 const Review = require("../models/Reviews");
+const Library = require("../models/Library");
 const express = require("express");
 const router = express.Router();
 
@@ -38,8 +39,18 @@ router.post("/post", async (req, res) => {
         if (!review) return res.status(400).json({
             msg: "Review doesn't seem right",
         });
+
         review.save()
-        return res.send(JSON.stringify(review))
+
+        let lib = await Library.findOne({name: library});
+        console.log(JSON.stringify(lib))
+        Library.updateOne(
+            {name: library},
+            {$inc: {total_rate: {rate}}}, 
+            {$inc: {total_reviews: 1}},
+            {$set: {rating:((lib?.total_rate + rate)/(lib?.total_reviews + 1)).toFixed(1)}});
+        
+        return res.send(JSON.stringify(review));
     } catch(e) {
         console.log(e);
         res.status(500).send("Error in posting review");

@@ -36,7 +36,18 @@ const LibraySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    rating: Number
+    total_rate:{
+        type: Number,
+        default: 0
+    },
+    total_reviews:{
+        type: Number,
+        default: 0
+    },
+    rating: {
+        type: Number,
+        default: 0
+    }
 })
 
 module.exports = mongoose.model("library", LibraySchema)
