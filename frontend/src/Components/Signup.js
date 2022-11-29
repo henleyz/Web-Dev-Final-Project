@@ -69,27 +69,7 @@ export default function SignupCard() {
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}>
-        <FormControl id="userName">
-          <FormLabel>User Icon</FormLabel>
-          <Stack direction={['column', 'row']} spacing={6}>
-            <Center>
-              <Avatar size="xl" src="https://pbs.twimg.com/profile_images/1276527827848818688/dfr7_4Kn_400x400.jpg">
-                <AvatarBadge
-                  as={IconButton}
-                  size="sm"
-                  rounded="full"
-                  top="-10px"
-                  colorScheme="red"
-                  aria-label="remove Image"
-                  icon={<SmallCloseIcon />}
-                />
-              </Avatar>
-            </Center>
-            <Center w="full">
-              <Button w="full">Change Icon</Button>
-            </Center>
-          </Stack>
-        </FormControl>    
+    
           <Stack spacing={4}>
             <HStack>
             <FormControl id="Username" isRequired>
@@ -137,11 +117,6 @@ export default function SignupCard() {
                 }}>
                 login
               </Button>
-            </Stack>
-            <Stack pt={6}>
-              <Text align={'center'}>
-                Already a user? <Link color={'blue.400'}>Login</Link>
-              </Text>
             </Stack>
           </Stack>
         </Box>
