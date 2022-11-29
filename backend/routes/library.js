@@ -5,10 +5,10 @@ const router = express.Router();
 //adding libraries
 let kresge = new Library({
     name: "kresge",
-    open : 900,
-    close : 2400,
-    lat: 37.87388090865484, 
-    long : -122.25832257833491,
+    open_time : 900,
+    close_time : 2400,
+    latitude: 37.87388090865484, 
+    longitude : -122.25832257833491,
     short_description : "The perfect library to last minute grind that cs project",
     long_description : "The Kresge Engineering Library is a meeting and study hub in the Bechtel Engineering Center. Our extensive collections and services support the research and teaching programs of the College of Engineering and beyond. ",
     image1_link : "https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-engineering-.jpg.webp?itok=kIqyqIKE",
@@ -16,14 +16,16 @@ let kresge = new Library({
 
 })
 kresge.save()
+// adding more libraries
+
 router.get("/", async (req, res) => {
     const {name} = req.body
     try{
-        let library = await Library.findOne({name})
+        let library = await Library.findOne({name}).lean()
         if (!library) {
             return res.status(400).json({msg: "Library not Exist"});
         } else {
-            return res.
+            return res.send(JSON.stringify(library))
         }
     } catch(e){
         console.log(e)
