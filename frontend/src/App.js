@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import login from '../src/Components/login'
 import logout from '../src/Components/logout'
 import { useEffect } from 'react';
-import {gapi} from 'gapi-script'
+//import {gapi} from 'gapi-script'
 import logo from './logo.svg';
 import './App.css';
 import { ChakraProvider, Box } from '@chakra-ui/react'
@@ -19,15 +19,15 @@ const clientId = "673795091694-s12v6e4o1ibtj47ltqn9mpp6n4ikad4a.apps.googleuserc
 
 
 function App() {
-  useEffect(() => { //useless for now 
-    function start(){
-      gapi.client.init({
-        clientId: clientId,
-        scope:""
-      })
-    };
-    gapi.load('client:auth2', start);
-  })
+  // useEffect(() => { //useless for now 
+  //   function start(){
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope:""
+  //     })
+  //   };
+  //   gapi.load('client:auth2', start);
+  // })
 
   return (
     <ChakraProvider>
