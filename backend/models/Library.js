@@ -52,6 +52,10 @@ const LibraySchema = mongoose.Schema({
     venue_id: {
         type: String
     },
+    base_noise_level: {
+        type: Number
+    }
+
 })
 
 module.exports = mongoose.model("library", LibraySchema)
