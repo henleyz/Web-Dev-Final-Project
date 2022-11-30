@@ -8,22 +8,30 @@ const Reviews = (props) => {
     const [list, setList] = useState([]);
     const [data, setData] = useState([]);
     const LibraryName = props.name;
+    
+
     useEffect(()=>{
-        getReviews();
+        getReviews()
     }, [])
     const [rating, setRating] = useState(5)
     var rattting
     const handleRating = (rate) => {
         rattting = rate;
     }
-     var posts = list.map((i) => <ReviewBlock key={i.name} title={i.title} body={i.body} name={i.name} rating={i.rating}></ReviewBlock>);
+     var posts = list.map((i) => <ReviewBlock key={i.name+""+i.title} title={i.title} body={i.body} name={i.name} rate={i.rate}></ReviewBlock>);
     //get request
-
+    
     const update = (props) => {
         setList(posts => [props, ...posts]);
     }
     
-
+     async function getReviewsHelper () {
+        await timeout(10);
+        getReviews();
+    }
+    async function timeout(delay) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
     const SubmitReviewForm = () => {
         const UsernameForm = () => { 
         if(1 === null) {
@@ -74,21 +82,24 @@ const Reviews = (props) => {
     function submitReview() {
         const title = document.getElementById('title').value;
         const body = document.getElementById('body').value;
-        axios.post("http://localhost:3000/review/post/",{library: LibraryName, title: title, body:body, rate:rating}).then(getReviews())
-
+        console.log(rattting)
+        axios.post("http://localhost:3000/review/post/",{library: LibraryName, title: title, body:body, rate:rattting}).then(getReviews())
+        timeout(1000)
+        getReviews()
     }
     var dummyReviewList = [{name:"oski", title: "shit library", rating:2, body:"this libray is really loud, people shouting, people smell bad and hot and sweaty. i hate this library. "},
                                 {name:"oski2", title: "ok library", rating:4, body:"not a bad lirbary, but gets busy"},
                                 {name:"oski3", title: "ok library", rating:5, body:"i saw oski here, so this librarby is the best. "}]
     const getReviews = () => {
         setList([]);
-        axios.get("http://localhost:3000/review/",{params:{library:LibraryName}})
+        console.log("oski")
+        axios.get("http://localhost:3000/review/",{params:{library:props.name}})
         .then((body) => setData(body.data)) 
        .catch((error) => console.log(error));
-
-    
+            
     for (const review of data) {
        update(review); 
+       console.log(review)
     }
 
 }
@@ -103,3 +114,4 @@ const Reviews = (props) => {
 )               
         }
 export default Reviews
+

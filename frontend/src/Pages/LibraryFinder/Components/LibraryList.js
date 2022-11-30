@@ -65,17 +65,17 @@ const LibaryList = () => {
     
 
    return (
-        <Flex margin="20">
+        <Flex margin="10">
             <Show above='1000px'> 
-            <Form data={{open:open, busy:busy, distance:distance, loud:loud}} func={show} apply={updateSearchParameters}></Form>
+            <Form data={{open:open, busy:busy, distance:distance, loud:loud}} width="100%" func={show} apply={updateSearchParameters}></Form>
             </Show>
            
             <Show below="1000px">
             <SlideEx data={{open:open, busy:busy, distance:distance, loud:loud}} apply={updateSearchParameters}></SlideEx>
             </Show>
-             <Box marginLeft="100px" maxWidth="1500px">
+             <Stack marginLeft="100px" width="100%" marginRight="200px">
              {/* <Button variant='solid' colorScheme='blue' onClick={getListHelper}>Get Libaries</Button> */}
-             {posts}</Box>
+             {posts}</Stack>
         </Flex>
 
     );
