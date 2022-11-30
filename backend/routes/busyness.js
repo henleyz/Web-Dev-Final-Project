@@ -27,32 +27,4 @@ router.get("/", async (req, res) => {
     }
 })
 
-// const params = new URLSearchParams({ 
-//     'api_key_private': 'pri_9d89e604208f40309e9e0a8f8625d696',
-//      'venue_name': 'McDonalds',
-//      'venue_address': 'Ocean Ave, San Fransisco'
-//    });
-   
-//    fetch(`https://besttime.app/api/v1/forecasts?${params}`, {
-//      method: 'POST'
-//    }).then(function(data) { 
-//      console.log(data); 
-//    });
-
-// router.post("/", async (req,res) => {
-//     console.log("Getting api");
-//     const params = req.params;
-//     try {
-//         fetch(`https://besttime.app/api/v1/forecasts?${params}`, {
-//             method: 'POST'
-//           }).then(function(data) { 
-//             console.log(data); 
-//           })
-//     } catch(e) {
-//         console.log(e);
-//         res.status(500).send("Cannot get the reviews");
-//     }
-// })
-
-
 module.exports = router
