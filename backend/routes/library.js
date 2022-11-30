@@ -102,6 +102,10 @@ router.get("/", async (req, res) => {
     }
 })
 
+router.get("/prefer", async (req, res) => {
+    const {latitude, longitude, loudness, distance, busyness} = req.query
+})
+
 router.get("/")
 
 module.exports = router
