@@ -52,9 +52,9 @@ const LibraryBlock = (props) => {
   <Stack>
     <CardBody>
       <Heading size='md'>{props.name}</Heading>
-      {/* {data.short_description} */}
+      {data.short_description}
       <Text py='2'> 
-{/* {data.long_description} */}
+{data.long_description}
       </Text>
       <Progress  value={64} />
       loudness
