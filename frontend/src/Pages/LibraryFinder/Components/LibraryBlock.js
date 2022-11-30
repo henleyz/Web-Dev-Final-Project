@@ -13,22 +13,24 @@ const LibraryBlock = (props) => {
 
   const [loading, setloading] = useState(true);
   const [data, SetData] = useState();
-  useEffect(()=>{getData()
-
-  }, [])
+  useEffect(()=>{getData()}, [])
 
   const getData = () => {
-    axios.get("http://localhost:3000/library/", {params:{libname: props.name }}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
+
+    axios.get("http://localhost:3000/library/", {params:{libname: props.name }}).then((body) => (SetData(body.data))).then(setloading(false)).catch((error) => console.log(error))
+    if (data === undefined) {
+      return (<div></div>)
+    }
     console.log(data)
   }
 
 
-
+  
 
 
   let hrefLink = '/library/' + props.name.replace(/ /g,'');
 
-  const content = loading ?  <div>loading </div> :
+  const content = (data===undefined) ? <div> loading </div> :
 <Stack padding={'5'} mineight="300px">
 <Card 
   direction={{ base: 'column', sm: 'row' }}
@@ -50,9 +52,9 @@ const LibraryBlock = (props) => {
   <Stack>
     <CardBody>
       <Heading size='md'>{props.name}</Heading>
-      {data.short_description}
+      {/* {data.short_description} */}
       <Text py='2'> 
-      {data.long_description}
+{/* {data.long_description} */}
       </Text>
       <Progress  value={64} />
       loudness
