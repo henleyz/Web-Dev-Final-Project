@@ -126,7 +126,21 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/prefer", async (req, res) => {
-    const {latitude, longitude, loudness, distance, busyness} = req.query
+    const isClose = req.query.isClose
+    const isQuiet = req.query.isQuiet
+    const isBusy = req.query.isBusy
+    let latitude_user = null
+    let longitude_user = null
+    if (isClose == "1"){
+        latitude_user = req.query.latitude
+        longitude_user = req.query.longitude
+    }
+    const CalculateScore = (library) => {
+        let distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude)))
+        let quietScore = library.base_noise_level - 50
+        let busyScore = 0 // I need to get live business data
+        return isClose * distanceScore + isQuiet * quietScore + isBusy * busyScore
+    }
     try{
         
     } catch(e){
