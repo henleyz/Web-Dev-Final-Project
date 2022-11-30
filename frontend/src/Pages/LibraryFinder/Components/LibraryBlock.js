@@ -43,7 +43,7 @@ const LibraryBlock = (props) => {
     maxH = "300px"
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
-    src={data.image1_link}
+    // src={data.image1_link}
     alt='Caffe Latte'
   />
 

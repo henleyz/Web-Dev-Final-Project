@@ -44,7 +44,8 @@ if (!moffit) {
         short_description:"Moffit has the best scene on campus",
         long_description:"Moffitt Library, located next to Memorial Glade, is one of the busiest libraries on campus. The library includes the Copy Center, Free Speech Movement Café, and convenient access to the collections in the Main (Gardner) Stacks. Reserved for UC Berkeley students and faculty, Moffitt is food- and drink-friendly, serves students of all majors, and is open the longest hours.",
         image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-moffitt-.jpg.webp?itok=rDFDP0mS",
-        image2_link:"https://static2.gensler.com/uploads/hero_element/11231/thumb_desktop/thumbs/project_MoffittLibrary_1024x576_01_1509396775_1024x576.jpg"
+        image2_link:"https://static2.gensler.com/uploads/hero_element/11231/thumb_desktop/thumbs/project_MoffittLibrary_1024x576_01_1509396775_1024x576.jpg",
+        venue_id: "ven_55686b35347473535f383452415968385a4375734557784a496843",
     })
     moffit.save()
 }

@@ -47,6 +47,9 @@ const LibraySchema = mongoose.Schema({
     rating: {
         type: Number,
         default: 0
+    },
+    venue_id: {
+        type: String
     }
 })
 
