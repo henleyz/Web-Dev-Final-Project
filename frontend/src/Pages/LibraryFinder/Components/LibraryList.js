@@ -28,7 +28,7 @@ const LibaryList = () => {
         setList(posts => [props, ...posts]);
     }
 
-    var posts = list.map((i) => <LibraryBlock key={i.name} name={i.name} description={i.description} image={i.image}></LibraryBlock>);
+    var posts = list.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
 
     const getList = (open, busy, distance, loud, lat, lng) => {
         console.log("send api request with")
@@ -38,14 +38,9 @@ const LibaryList = () => {
 		//const libraries = body.data;
         setList([]);
         //sample data
-        const libraries = [{name: 'Oski Library', description:"where to find oskis's torture chamber", image:'https://pbs.twimg.com/profile_images/1276527827848818688/dfr7_4Kn_400x400.jpg'},
-        {name: 'Moffit library', description:"too loud", image:'https://cdn.britannica.com/41/156441-050-A4424AEC/Grizzly-bear-Jasper-National-Park-Canada-Alberta.jpg?w=400&h=300&c=crop'}
-      ,  {name: 'Main Stacks Library', description:"This is libary 3 descriotoin Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image:'https://cdn.britannica.com/41/156441-050-A4424AEC/Grizzly-bear-Jasper-National-Park-Canada-Alberta.jpg?w=400&h=300&c=crop'}
-,{name: 'Engineering Library', description:"THis is libaraby 4 descrpotion.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image:'https://cdn.britannica.com/41/156441-050-A4424AEC/Grizzly-bear-Jasper-National-Park-Canada-Alberta.jpg?w=400&h=300&c=crop'}
-,  {name: 'library 5', description:"This is libary 5 descriotoin Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image:'https://cdn.britannica.com/41/156441-050-A4424AEC/Grizzly-bear-Jasper-National-Park-Canada-Alberta.jpg?w=400&h=300&c=crop'}
-,{name: 'library 6', description:"THis is libaraby 6 descrpotion.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image:'https://cdn.britannica.com/41/156441-050-A4424AEC/Grizzly-bear-Jasper-National-Park-Canada-Alberta.jpg?w=400&h=300&c=crop'}
+        const libraries = ["moffit", "kresge", "mainstack"]
 
-    ]
+    
         libraries.reverse();
         for(const library of libraries) {
             update(library)
