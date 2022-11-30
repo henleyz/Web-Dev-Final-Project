@@ -50,13 +50,13 @@ const Library = () => {
     const { id } = useParams();
     const [props, SetData] = useState();
     const getData = () =>{
-          axios.get("http://localhost:3000/library/", {params:{libname:"kresge"}}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
+          axios.get("http://localhost:3000/library/", {params:{libname:id}}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
 
     }
     
   
 
-    const content = loading ?  <div>loading </div> :
+    const content = props === undefined ?  <div>loading </div> :
         <div>
         <NavBar></NavBar>
         
@@ -69,9 +69,7 @@ const Library = () => {
             <Image
               rounded={'md'}
               alt={'product image'}
-              src={ props.image1_link
-
-              }
+                src={ props.image1_link}
               fit={'cover'}
               align={'center'}
               w={'100%'}
@@ -90,8 +88,7 @@ const Library = () => {
                 color={'gray.900'}
                 fontWeight={300}
                 fontSize={'2xl'}>
-                {props.hours}
-              </Text>
+                              </Text>
             </Box>
   
             <Stack
