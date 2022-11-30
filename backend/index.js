@@ -13,7 +13,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", user)
 app.use("/library", library)
-app.use("/review,", review)
+app.use("/review", review)
+
+// Comment out when you don't want to clear the database
+// const clear = require("./clearDB");
+// app.use("/clearDB", clear)
 
 app.get("/", (req, res) => {
     res.json({ message: "API Working" });

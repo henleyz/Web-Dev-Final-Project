@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 
 const ReviewSchema = mongoose.Schema({
-    username: {
+    library: {
         type: String,
+        required: true
     },
-    content: {
+    title: {
+        type: String,
+        required: true
+    },
+    body: {
         type: String,
         required: true // Have to be exist when creating new user.
+    },
+    rate: {
+        type: Number,
+        required: true
     },
     createdAt: {
         type: Date,

@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/signup", async (req, res) => {
     const {username, email, password} = req.body; // get the info of the user account
     try { // check if the user is already inside the data base
-        let user = await User.findOne({email}); // findOne access mongoDB, accessing User schema we defined, and then check if has this email
+        let user = await User.findOne({email}) // findOne access mongoDB, accessing User schema we defined, and then check if has this email
         if (user) {
             return res.status(400).json({
                 msg: "User already exist.",
