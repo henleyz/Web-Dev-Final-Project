@@ -3,11 +3,12 @@ import {   Accordion,Box,  Link,
   AccordionButton,
   AccordionPanel,
   AccordionIcon, Card, Progress,
-   CardHeader, CircularProgress, CircularProgressLabel, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container } from '@chakra-ui/react'
+   CardHeader, CircularProgress, CircularProgressLabel, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container, HStack } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import CommentBox from './CommentBox.js'
 import {ChatIcon} from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
+import { Rating } from "react-simple-star-rating";
 import axios from 'axios'
 const LibraryBlock = (props) => {
 
@@ -38,6 +39,7 @@ const LibraryBlock = (props) => {
   variant='outline'
   minH="300px"
   maxH="300px"
+  minW="100%"
 >
   <Image //pictrue
     minH="300px"
@@ -45,26 +47,30 @@ const LibraryBlock = (props) => {
     maxH = "300px"
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
-    // src={data.image1_link}
+    src={data.image1_link}
     alt='Caffe Latte'
   />
 
   <Stack>
     <CardBody>
       <Heading size='md'>{props.name}</Heading>
-      {data.short_description}
+      {data.open_time} - {data.close_time}
       <Text py='2'> 
-{data.long_description}
+{data.short_description}                                           
       </Text>
-      <Progress  value={64} />
+      <HStack></HStack>
       loudness
-      <CircularProgress value={40} color='green.400'>
-  <CircularProgressLabel>40%</CircularProgressLabel>
+      <CircularProgress value={data.loudness} color='green.400'>
+  <CircularProgressLabel>{data.loudness}</CircularProgressLabel>
 </CircularProgress>
 busyness
-<CircularProgress value={40} color='green.400'>
-  <CircularProgressLabel>40%</CircularProgressLabel>
+<CircularProgress value={data.busyness} color='green.400'>
+  <CircularProgressLabel>{data.busyness}</CircularProgressLabel>
 </CircularProgress>
+<Rating readonly initialValue={data.rating}></Rating>
+      <Text color='blue.600' fontSize='2xl'>
+        {data.rating}/5
+      </Text>
     </CardBody>
 
     <CardFooter><Link href={hrefLink}>
@@ -73,19 +79,7 @@ busyness
       </Button></Link>
       
     </CardFooter>
-    <Box display='flex' mt='2' alignItems='center'>
-          {Array(5)
-            .fill('')
-            .map((_, i) => (
-              <ChatIcon
-                key={i}
-                color={i < props.rating ? 'teal.500' : 'gray.300'}
-              />
-            ))}
-          <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            {props.reviewCount} reviews
-          </Box>
-          </Box>
+  
   </Stack>
 </Card>
 

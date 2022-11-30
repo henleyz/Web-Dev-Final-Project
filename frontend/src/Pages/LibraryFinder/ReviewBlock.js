@@ -1,6 +1,7 @@
 import {Box, Card, CardBody, Image, Stack, Heading, Text, Divider, CardFooter, ButtonGroup, Button} from "@chakra-ui/react"
 import { Rating } from "react-simple-star-rating";
 const ReviewBlock = (props) => {
+  console.log(props.rate)
     return(
       <Card maxW='sm'>
   <CardBody>
@@ -13,7 +14,7 @@ const ReviewBlock = (props) => {
       <Text>
         {props.body}
       </Text>
-      <Rating readonly initialValue={props.rating}></Rating>
+      <Rating readonly initialValue={props.rate}></Rating>
       <Text color='blue.600' fontSize='2xl'>
         {props.rating}
       </Text>
