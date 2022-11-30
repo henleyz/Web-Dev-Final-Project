@@ -17,9 +17,11 @@ app.use("/library", library)
 app.use("/review", review)
 app.use("/busyness", busyness)
 
-// Comment out when you don't want to clear the database
-// const clear = require("./clearDB");
-// app.use("/clearDB", clear)
+// Change to true when you don't want to restart the database
+if (false) {
+    const clear = require("./clearDB");
+    app.use("/clearDB", clear)
+}
 
 app.get("/", (req, res) => {
     res.json({ message: "API Working" });
