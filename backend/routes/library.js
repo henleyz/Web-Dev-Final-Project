@@ -127,6 +127,12 @@ router.get("/", async (req, res) => {
 
 router.get("/prefer", async (req, res) => {
     const {latitude, longitude, loudness, distance, busyness} = req.query
+    try{
+        
+    } catch(e){
+        console.log(e)
+        res.status(500).send("Error in fetching prefered library");
+    }
 })
 
 router.get("/")

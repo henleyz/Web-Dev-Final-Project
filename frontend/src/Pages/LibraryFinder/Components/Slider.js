@@ -14,24 +14,36 @@ function SliderMarkExample(props) {
     const labelStyles = {
       mt: '2',
       ml: '-2.5',
-      fontSize: 'sm',
+      fontSize: '10',
     }
 
     function returnValue(){
       props.returnValue(sliderValue);
     }
-  
+
+    const covertSliderValue = (s) =>{
+      if (s < 30){
+        return props.begin;
+      } else if (s > 70) {
+        return props.end;}
+        else
+        {
+        return props.middle
+        }
+        
+    }
+   
     return (
       <Box pt={6} pb={2}>
         <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)} onChangeEnd={returnValue}>
-          <SliderMark value={25} {...labelStyles}>
-            25%
+          <SliderMark flex value={5} {...labelStyles}>
+            {props.begin}
           </SliderMark>
           <SliderMark value={50} {...labelStyles}>
-            50%
+            {props.middle}
           </SliderMark>
-          <SliderMark value={75} {...labelStyles}>
-            75%
+          <SliderMark value={95} {...labelStyles}>
+            {props.end}
           </SliderMark>
           <SliderMark
             value={sliderValue}
@@ -41,8 +53,9 @@ function SliderMarkExample(props) {
             mt='-10'
             ml='-5'
             w='12'
+            fontSize={10}
           >
-            {sliderValue}%
+            {covertSliderValue(sliderValue)}
           </SliderMark>
           <SliderTrack>
             <SliderFilledTrack />

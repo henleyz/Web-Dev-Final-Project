@@ -51,18 +51,18 @@ function updateSearchParameters(o, b, d, l){
         }, () => {setStatus('unable to get location');});}};
 
     return(
-       <Box margin={0}>
+       <Box minW="300">
         <Button onClick={getLocation}>get location</Button>
         <Heading>location</Heading>
         <p>{status}</p>
         {lat && <p>Latitude: {lat}</p>}
         {lng && <p>Longitude: {lng}</p>}
         <Checkbox defaultChecked onChange={(e) => setOpen(e.target.checked)}>Is Open</Checkbox>
-<Box>Loudness <SliderMarkExample returnValue={setLoud}></SliderMarkExample>
+<Box>Loudness <SliderMarkExample returnValue={setLoud} begin="silent" middle="average" end="lively"></SliderMarkExample>
 </Box>
-<Box>Distance <SliderMarkExample returnValue={setDistance}></SliderMarkExample>
+<Box>Distance <SliderMarkExample returnValue={setDistance} begin="lazy" middle="walkable" end="bikable"></SliderMarkExample>
 </Box>
-<Box>Busyness <SliderMarkExample returnValue={setBusy}></SliderMarkExample>
+<Box>Busyness <SliderMarkExample returnValue={setBusy} begin="empty" middle="average" end="good luck finding a seat"></SliderMarkExample>
 </Box>
 <Button onClick={applyAndClose}>Apply FIlters</Button>
 
