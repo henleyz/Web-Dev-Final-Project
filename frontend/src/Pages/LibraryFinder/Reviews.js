@@ -12,6 +12,7 @@ const Reviews = (props) => {
 
     useEffect(()=>{
         getReviews()
+
     }, [])
     const [rating, setRating] = useState(5)
     var rattting
@@ -72,8 +73,8 @@ const Reviews = (props) => {
               <Box border="10px"><textarea rows="4" cols="50" id="body"/></Box>
               
             </FormControl>
-            <Button onClick={submitReview}>Submit</Button>
-            <Button onClick={getReviews}>Submit</Button>
+            <Button onClick={submitReview}>Submit Review</Button>
+            <Button onClick={getReviews}>Load Reviews</Button>
             </Box>
 
         )
@@ -84,8 +85,8 @@ const Reviews = (props) => {
         const body = document.getElementById('body').value;
         console.log(rattting)
         axios.post("http://localhost:3000/review/post/",{library: LibraryName, title: title, body:body, rate:rattting}).then(getReviews())
-        timeout(1000)
-        getReviews()
+
+        
     }
     var dummyReviewList = [{name:"oski", title: "shit library", rating:2, body:"this libray is really loud, people shouting, people smell bad and hot and sweaty. i hate this library. "},
                                 {name:"oski2", title: "ok library", rating:4, body:"not a bad lirbary, but gets busy"},
