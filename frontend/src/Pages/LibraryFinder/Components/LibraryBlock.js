@@ -7,20 +7,28 @@ import {   Accordion,Box,  Link,
 import { Text } from '@chakra-ui/react'
 import CommentBox from './CommentBox.js'
 import {ChatIcon} from '@chakra-ui/icons'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 const LibraryBlock = (props) => {
 
-  
+  const [loading, setloading] = useState(true);
+  const [data, SetData] = useState();
+  useEffect(()=>{getData()
 
-function getLibraryDetailsFromName(name){
-    props = name;
-}
+  }, [])
 
-getLibraryDetailsFromName(props)
+  const getData = () => {
+    axios.get("http://localhost:3000/library/", {params:{libname: props.name }}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
+    console.log(data)
+  }
+
+
+
+
 
   let hrefLink = '/library/' + props.name.replace(/ /g,'');
-  /* TODO */
 
-  return (
+  const content = loading ?  <div>loading </div> :
 <Stack padding={'5'} mineight="300px">
 <Card 
   direction={{ base: 'column', sm: 'row' }}
@@ -35,16 +43,16 @@ getLibraryDetailsFromName(props)
     maxH = "300px"
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
-    src={props.image}
+    src={data.image1_link}
     alt='Caffe Latte'
   />
 
   <Stack>
     <CardBody>
       <Heading size='md'>{props.name}</Heading>
-      {props.hours}
+      {data.short_description}
       <Text py='2'> 
-      {props.description}
+      {data.long_description}
       </Text>
       <Progress  value={64} />
       loudness
@@ -83,7 +91,7 @@ busyness
 
 </Stack>
 
-)
+return <div>{content}</div>
 
 }
 export default LibraryBlock;
