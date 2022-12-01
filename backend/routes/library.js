@@ -5,7 +5,7 @@ const updateHourAndBusyness = require("../middleware/updateHourAndBusyness")
 
 router.get("/", updateHourAndBusyness, async (req, res) => {
     const libname = req.query.libname
-    console.log("Get library info from :" + libname)
+    console.log("Get library info from : " + libname)
     try{
         let library = await Library.findOne({name: libname})
         if (!library) {
@@ -36,7 +36,11 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
         if (isNear == 1) distanceScore = 10000 * Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
         let busyScore = 0
-        if (isBusy == 1) busyScore = library.busyness_info.analysis.venue_live_busyness
+        if (library.busyness_info.analysis.venue_live_busyness_available) {
+            busyScore = library.busyness_info.analysis.venue_live_busyness
+        } else if (library.busyness_info.analysis.venue_forecast_busyness_available) {
+            busyScore = library.busyness_info.analysis.venue_forecast_busyness
+        }
         if (library.is_open != 1 && isOpen == 1) {
             return Infinity // lowest priority
         }
