@@ -22,8 +22,8 @@ if (!kresge) {
     kresge = new Library({
         name: "kresge",
         full_name: "Kresge Engineering Library",
-        open_time : 900,
-        close_time : 2400,
+        open_time : 9,
+        close_time : 24,
         latitude: 37.87388090865484, 
         longitude : -122.25832257833491,
         short_description : "The perfect library to last minute grind that cs project",
@@ -41,8 +41,8 @@ if (!moffit) {
     moffit = new Library({
         name: "moffit",
         full_name: "James K. Moffitt Undergraduate Library",
-        open_time: 800,
-        close_time:600,
+        open_time: 8,
+        close_time:6,
         latitude:37.872672419959436,
         longitude:-122.26056838146692,
         short_description:"Moffit has the best scene on campus",
@@ -59,8 +59,8 @@ if (!mainstack) {
     mainstack = new Library({
         name:"mainstack",
         full_name: "Main (Gardner) Stacks",
-        open_time:900,
-        close_time:200,
+        open_time:9,
+        close_time:2,
         latitude:37.87235256259323,
         longitude:-122.25916374878575,
         short_description:"A basement style library.",
@@ -73,39 +73,20 @@ if (!mainstack) {
     mainstack.save()
 }
 
-let anthropology = await Library.findOne({name: "anthropology"});
-if (!anthropology) {
-    anthropology = new Library({
-        name: "anthropology",
-        full_name: "Anthropology Library",
-        open_time : "1300",
-        close_time : "1700",
-        latitude: "37.86995158885346", 
-        longitude : "-122.25536120961735",
-        short_description : "Closed indefinitely",
-        long_description : "The George and Mary Foster Anthropology Library holds academic works covering sociocultural anthropology, traditional cultures, archaeology, folklore methods and theory, and physical anthropology. The library has 59,000 print volumes, with several thousand more stored off-site, and provides access to more than 12,000 e-books on archaeology, ethnography, or anthropology.",
-        image1_link : "https://www.lib.berkeley.edu/sites/default/files/inline-images/anthro_4349_0.jpg",
-        image2_link : "https://d12hrbxctjickz.cloudfront.net/wp-content/uploads/2022/02/library_William-Webster_ss.jpg",
-        base_noise_level : 0,
-        venue_id: "",
-    })
-    anthropology.save()
-}
-
 let business = await Library.findOne({name: "business"});
 if (!business) {
     business = new Library({
         name:"business",
         full_name: "The Thomas J. Long Business Library",
-        open_time:700,
-        close_time:2200,
+        open_time:7,
+        close_time:22,
         latitude:37.8716258950288,
         longitude:-122.25298366227898,
         short_description:"I've never been there.",
         long_description:"The Thomas J. Long Business Library is your hub for business information at UC Berkeley. We'll help you find company, industry, and financial market data for your coursework, research, or job search.",
         image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-BUSINESS-02.jpg.webp?itok=9F1P2hpI",
         image2_link:"https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=e9vAYNJIaQmaX9iUA-1myQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=269.92892&pitch=0&thumbfov=100",
-        base_noise_level : 0,
+        base_noise_level : 70,
         venue_id: "ven_55645a645242433332476652415968387044734237596d4a496843"
     })
     business.save()
@@ -145,13 +126,17 @@ router.get("/prefer", async (req, res) => {
         let distanceScore = 0
         if (isNear == 1) distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
-        let open = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
-        .then(res => res.json())
-        .then(data => data.venue_info.venue_open)
-        console.log(open)
-        if (open != "Open" && isOpen == 1) {
+        let now = new Date().getHours()
+        if (now < library.open_time && now > library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
+            now = 0  // Is close                                   // Ex: open = 8, close 22, now = 23 => now = 0
+        } else {
+            now = 1 // Is open 
+        }
+        if (now != 1 && isOpen == 1) {
             return Infinity
         }
+        setTimeout(() => {
+        }, 150); // Manually setting time out
         let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
         .then(res => res.json())
         .then(data => data.analysis.venue_live_busyness)

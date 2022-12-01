@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
             return res.status(404).json({msg: "Library not Exist"});
         } else {
             const params = new URLSearchParams({ 
-                'api_key_private': 'pri_9d89e604208f40309e9e0a8f8625d696',
+                'api_key_private': 'pri_3b04d01e8a814675aa40cae855c7521c',
                 'venue_id' : library.venue_id
               });
               await fetch(`https://besttime.app/api/v1/forecasts/live?${params}`, {
