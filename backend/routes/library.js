@@ -159,7 +159,8 @@ router.get("/prefer", async (req, res) => {
         return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
     }
     try{
-        let libs = await Library.aggregate([{$project: {score:CalculateScore()}}]).sort({score: -1}).limit(5) //5 libraries with least score
+        let libs = await Library.find({})
+        libs.sort((x, y) => CalculateScore(x) - CalculateScore(y))
         res.send(JSON.stringify(libs))
     } catch(e){
         console.log(e)
