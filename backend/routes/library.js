@@ -215,18 +215,26 @@ router.get("/prefer", async (req, res) => {
 
         setTimeout(() => {
         }, 100); // Manually setting time out
-
-        let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
-        .then(res => res.json())
-        .then(data => data.analysis.venue_live_busyness)
+        // if (library.busyness_info == null) {
+        //     let info = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
+        //     .then(res => res.json())
+        // }
+        // let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
+        // .then(res => res.json())
+        // .then(data => data.analysis.venue_live_busyness)
         // I need to get live business data
-        return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
+        // return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
+        return isQuiet * quietScore
     }
     try{
         let libs = await Library.find({})
+        console.log(libs.map((lib) => lib.name))
         libs.sort((x, y) => CalculateScore(x) - CalculateScore(y))
         let newlist = libs.map((lib) => lib.name)
-        res.send(JSON.stringify(newlist))
+        let scorelist = libs.map((lib) => CalculateScore(lib))
+        console.log(newlist)
+        console.log(scorelist)
+        res.send(JSON.stringify(newlist)) // get names
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
