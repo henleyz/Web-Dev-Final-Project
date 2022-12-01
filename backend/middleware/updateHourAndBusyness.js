@@ -7,11 +7,12 @@ module.exports = async function(req, res, next){
     let libs = await Library.find({})
     if (now == libs[0].current_hour && libs[0].busyness_info != "No info") {
         console.log("No need to update")
-        next()
+        //next()
         return
     } else {
         libs.forEach(async function(library) {
-            let busy_info = await fetch(`http://localhost:3000/busyness?libname=${library.name}`).then(res => res.json())
+            let busy_info = 100
+            //await fetch(`http://localhost:3000/busyness?libname=${library.name}`).then(res => res.json())
             let open_time = library.open_time
             let close_time = library.close_time
             let current = now
@@ -24,7 +25,7 @@ module.exports = async function(req, res, next){
             }
             await Library.updateOne({name: library.name}, {$set:{current_hour: now, busyness_info: busy_info, is_open: current}})
         })
-        next()
+        //next()
         return 
     }
 }

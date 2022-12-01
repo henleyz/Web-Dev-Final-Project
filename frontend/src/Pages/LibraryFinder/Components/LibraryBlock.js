@@ -30,7 +30,7 @@ const LibraryBlock = (props) => {
 
   let hrefLink = '/library/' + props.name.replace(/ /g,'');
 
-  const content = (data===undefined) ? <div> loading </div> :
+  const content = (data===undefined) ? <div> loading </div> : 
 <Stack padding={'5'} mineight="300px">
 <Card 
   direction={{ base: 'column', sm: 'row' }}
@@ -39,7 +39,7 @@ const LibraryBlock = (props) => {
   minH="300px"
   maxH="300px"
   minW="100%"
-  backgroundColor={new Date().getHours() > data.open_time && new Date().getHours() < data.close_time ?  'white.100' : 'red.50'}
+  backgroundColor={new Date().getHours() >= data.open_time && new Date().getHours() <= data.close_time ?  'white.100' : 'red.50'}
 >
   <Image //pictrue
     minH="300px"
@@ -53,7 +53,7 @@ const LibraryBlock = (props) => {
 
   <Stack>
     <CardBody>
-      <Heading size='md' color="red">{new Date().getHours() > data.open_time && new Date().getHours() < data.close_time ?  ' ' : 'CLOSED '}</Heading>
+      <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() <= data.close_time ?  ' ' : 'CLOSED '}</Heading>
       <Heading size='md'>{data.full_name}</Heading>
       {data.open_time} - {data.close_time}
       <Text py='2'> 
