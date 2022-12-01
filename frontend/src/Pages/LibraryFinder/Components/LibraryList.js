@@ -16,6 +16,7 @@ const LibaryList = () => {
     const [busy, setBusy] = useState(50);
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
+    const [data, setData] = useState([]);
 
     useEffect(()=>{
         getListHelper();
@@ -33,12 +34,13 @@ const LibaryList = () => {
     const getList = (open, busy, distance, loud, lat, lng) => {
         console.log("send api request with")
         console.log("isopen: "+ open  +" busy: "+busy +  "distance: " + distance + "loud: " + loud + "location: " + lat +", " +  lng+". ")
+        axios.get("http://localhost:3000/library/prefer", {isOpen:open, busyness:busy, distance:distance, loudness:loud, lat:lat, lng:lng}).then((data) => setData(data))
         //axios.get(`backendShit`, {timeout: 10 * 1000}).then((body) => {
 		//console.log("Received response from server : ", body.data);
 		//const libraries = body.data;
         setList([]);
         //sample data
-        const libraries = ["moffit", "kresge", "mainstack"]
+        const libraries = ["moffit", "kresge", "mainstack", "business"]
 
     
         libraries.reverse();

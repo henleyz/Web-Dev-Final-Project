@@ -4,6 +4,10 @@ const LibraySchema = mongoose.Schema({
         type: String,
         required: true 
     },
+    full_name: {
+        type: String,
+        required: true 
+    },
     open_time: {
         type: Number,
         required: true 

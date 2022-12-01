@@ -19,7 +19,9 @@ const Reviews = (props) => {
     const handleRating = (rate) => {
         rattting = rate;
     }
-     var posts = list.map((i) => <ReviewBlock key={i.name+""+i.title} title={i.title} body={i.body} name={i.name} rate={i.rate}></ReviewBlock>);
+     var posts = data && data.map(i =>
+        <ReviewBlock key={i.name+""+i.title} title={i.title} body={i.body} name={i.name} rate={i.rate}></ReviewBlock>)
+     //list.map((i) => );
     //get request
     
     const update = (props) => {
@@ -74,7 +76,6 @@ const Reviews = (props) => {
               
             </FormControl>
             <Button onClick={submitReview}>Submit Review</Button>
-            <Button onClick={getReviews}>Load Reviews</Button>
             </Box>
 
         )

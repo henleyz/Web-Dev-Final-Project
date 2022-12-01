@@ -21,6 +21,7 @@ let kresge = await Library.findOne({name: "kresge"});
 if (!kresge) {
     kresge = new Library({
         name: "kresge",
+        full_name: "Kresge Engineering Library",
         open_time : 900,
         close_time : 2400,
         latitude: 37.87388090865484, 
@@ -39,6 +40,7 @@ let moffit = await Library.findOne({name: "moffit"});
 if (!moffit) {
     moffit = new Library({
         name: "moffit",
+        full_name: "James K. Moffitt Undergraduate Library",
         open_time: 800,
         close_time:600,
         latitude:37.872672419959436,
@@ -56,13 +58,14 @@ let mainstack = await Library.findOne({name: "mainstack"});
 if (!mainstack) {
     mainstack = new Library({
         name:"mainstack",
+        full_name: "Main (Gardner) Stacks",
         open_time:900,
         close_time:200,
         latitude:37.87235256259323,
         longitude:-122.25916374878575,
         short_description:"A basement style library.",
         long_description:"The David Pierpont Gardner Stacks is a large multi-level space housing 2.3 million volumes, of the approximately 4.5 million volumes that constitute Doe Library’s research collection. Access to the Main (Gardner) Stacks is via Moffitt Library or Doe Library. Open tables, study carrels, and group study rooms are arranged throughout the floors and serve as a primary study area for UC Berkeley students and faculty.",
-        image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-Doe-05041_2.jpg.webp?itok=A4wveHVs",
+        image1_link:"https://i.pinimg.com/originals/69/06/37/6906377a15dd28c53b3f5c7b75cf952e.jpg",
         image2_link:"https://live.staticflickr.com/7582/28551141222_5a4227da65_b.jpg",
         base_noise_level: 50,
         venue_id: "ven_385048586949466a2d447552415968393556786f7035514a496843",
@@ -74,6 +77,7 @@ let anthropology = await Library.findOne({name: "anthropology"});
 if (!anthropology) {
     anthropology = new Library({
         name: "anthropology",
+        full_name: "Anthropology Library",
         open_time : "1300",
         close_time : "1700",
         latitude: "37.86995158885346", 
@@ -92,6 +96,7 @@ let business = await Library.findOne({name: "business"});
 if (!business) {
     business = new Library({
         name:"business",
+        full_name: "The Thomas J. Long Business Library",
         open_time:700,
         close_time:2200,
         latitude:37.8716258950288,
