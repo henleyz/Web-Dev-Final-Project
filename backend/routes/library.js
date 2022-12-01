@@ -72,7 +72,24 @@ if (!mainstack) {
     })
     mainstack.save()
 }
-
+// let anthropology = await Library.findOne({name: "anthropology"});
+// if (!anthropology) {
+//     anthropology = new Library({
+//         name: "anthropology",
+//         full_name: "Anthropology Library",
+//         open_time : "1300",
+//         close_time : "1700",
+//         latitude: "37.86995158885346", 
+//         longitude : "-122.25536120961735",
+//         short_description : "Closed indefinitely",
+//         long_description : "The George and Mary Foster Anthropology Library holds academic works covering sociocultural anthropology, traditional cultures, archaeology, folklore methods and theory, and physical anthropology. The library has 59,000 print volumes, with several thousand more stored off-site, and provides access to more than 12,000 e-books on archaeology, ethnography, or anthropology.",
+//         image1_link : "https://www.lib.berkeley.edu/sites/default/files/inline-images/anthro_4349_0.jpg",
+//         image2_link : "https://d12hrbxctjickz.cloudfront.net/wp-content/uploads/2022/02/library_William-Webster_ss.jpg",
+//         base_noise_level : 0,
+//         venue_id: "ewweewe",
+//     })
+//     anthropology.save()
+// }
 let business = await Library.findOne({name: "business"});
 if (!business) {
     business = new Library({
@@ -136,7 +153,7 @@ router.get("/prefer", async (req, res) => {
             return Infinity
         }
         setTimeout(() => {
-        }, 150); // Manually setting time out
+        }, 100); // Manually setting time out
         let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
         .then(res => res.json())
         .then(data => data.analysis.venue_live_busyness)

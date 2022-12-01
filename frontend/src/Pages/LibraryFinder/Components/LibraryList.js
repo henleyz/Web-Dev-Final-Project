@@ -19,7 +19,7 @@ const LibaryList = () => {
     const [data, setData] = useState([]);
 
     useEffect(()=>{
-        getListHelper();
+        //getListHelper();
     }, [])
 
     /* Use the map() function to render multiple Blocks! */
@@ -27,27 +27,38 @@ const LibaryList = () => {
 
     const update = (props) => {
         setList(posts => [props, ...posts]);
+        console.log(data)
     }
 
-    var posts = list.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
+    var posts = Array.isArray(data) && (data.length !== 0)  && data.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
 
     const getList = (open, busy, distance, loud, lat, lng) => {
+        if(lat === null || lng === null) {
+            distance = 100;
+        }
         console.log("send api request with")
         console.log("isopen: "+ open  +" busy: "+busy +  "distance: " + distance + "loud: " + loud + "location: " + lat +", " +  lng+". ")
-        axios.get("http://localhost:3000/library/prefer", {isOpen:open, busyness:busy, distance:distance, loudness:loud, lat:lat, lng:lng}).then((data) => setData(data))
+        axios.get("http://localhost:3000/library/prefer", {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng}).then((data) => setData(data))
+        console.log(data)
+        console.log("hi")
+        for (const library of data) {
+            update(library); 
+            console.log(library)
+         }
         //axios.get(`backendShit`, {timeout: 10 * 1000}).then((body) => {
 		//console.log("Received response from server : ", body.data);
 		//const libraries = body.data;
-        setList([]);
-        //sample data
-        const libraries = ["moffit", "kresge", "mainstack", "business"]
+    }
+    //     setList([]);
+    //     //sample data
+    //     const libraries = ["moffit", "kresge", "mainstack", "business"]
 
     
-        libraries.reverse();
-        for(const library of libraries) {
-            update(library)
-        }
-    }
+    //     libraries.reverse();
+    //     for(const library of libraries) {
+    //         update(library)
+    //     }
+    // }
 
     const getListHelper = () => {
         getList(open, busy, distance, loud, lat, lng)
