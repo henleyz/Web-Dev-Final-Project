@@ -146,8 +146,15 @@ router.get("/prefer", async (req, res) => {
         let now = new Date().getHours()
         let open_time = library.open_time
         let close_time = library.close_time
-        if (close_time < open_time) close_time += 24
-        if (now >= library.open_time && now < library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
+
+        if (close_time < open_time) {
+            if (now <= close_time){
+                now += 24;
+            }
+            close_time += 24;
+        }
+
+         if (now >= library.open_time && now < library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
             now = 1  // Is open                                   // Ex: open = 8, close 22, now = 23 => now = 0
         } else {
             now = 0 // Is close
@@ -155,6 +162,7 @@ router.get("/prefer", async (req, res) => {
         if (now != 1 && isOpen == 1) {
             return Infinity
         }
+
         setTimeout(() => {
         }, 100); // Manually setting time out
         let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
@@ -167,6 +175,9 @@ router.get("/prefer", async (req, res) => {
         let libs = await Library.find({})
         libs.sort((x, y) => CalculateScore(x) - CalculateScore(y))
         res.send(JSON.stringify(libs))
+        console.log("hi")
+        console.log(libs)
+        console.log("hi")
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
