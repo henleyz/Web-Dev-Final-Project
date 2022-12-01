@@ -18,7 +18,7 @@ app.use("/review", review)
 app.use("/busyness", busyness)
 
 // Change to true when you don't want to restart the database
-if (true) {
+if (false) {
     const clear = require("./clearDB");
     app.use("/clearDB", clear)
 }
