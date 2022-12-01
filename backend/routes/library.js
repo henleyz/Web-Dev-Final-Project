@@ -144,10 +144,13 @@ router.get("/prefer", async (req, res) => {
         if (isNear == 1) distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
         let now = new Date().getHours()
-        if (now < library.open_time && now > library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
-            now = 0  // Is close                                   // Ex: open = 8, close 22, now = 23 => now = 0
+        let open_time = library.open_time
+        let close_time = library.close_time
+        if (close_time < open_time) close_time += 24
+        if (now >= library.open_time && now < library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
+            now = 1  // Is close                                   // Ex: open = 8, close 22, now = 23 => now = 0
         } else {
-            now = 1 // Is open 
+            now = 0 // Is open 
         }
         if (now != 1 && isOpen == 1) {
             return Infinity
