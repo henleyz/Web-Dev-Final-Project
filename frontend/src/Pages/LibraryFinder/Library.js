@@ -2,8 +2,8 @@ import React, { Component, useState, useEffect } from "react";
 import { useParams,  } from "react-router-dom";
 import NavBar from './Components/NavBar.tsx';
 import dummyLibraryList from './dummyLibraryList';
-import CustomGoogleMap from './GoogleMap.tsx'
-
+import CustomGoogleMap from './GoogleMap.tsx';
+import { Rating } from "react-simple-star-rating";
 import {
     Box,
     chakra,
@@ -22,6 +22,9 @@ import {
     List,
     ListItem,
     DrawerOverlay,
+    CircularProgress,
+    CircularProgressLabel,
+    HStack,
   } from '@chakra-ui/react';
 import Reviews from "./Reviews";
 import ReviewBlock from "./ReviewBlock";
@@ -84,7 +87,7 @@ const Library = () => {
                 lineHeight={1.1}
                 fontWeight={600}
                 fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}>
-                {id}
+                {props.full_name}
               </Heading>
               <Text
                 color={'gray.900'}
@@ -136,82 +139,23 @@ const Library = () => {
                 </SimpleGrid>
               </Box>
               <Box>
-                <Text
-                  fontSize={{ base: '16px', lg: '18px' }}
-                  color={'yellow.500'}
-                  fontWeight={'500'}
-                  textTransform={'uppercase'}
-                  mb={'4'}>
-                  Product Details
-                </Text>
-  
-                <List spacing={2}>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Between lugs:
-                    </Text>{' '}
-                    20 mm
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Bracelet:
-                    </Text>{' '}
-                    leather strap
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Case:
-                    </Text>{' '}
-                    Steel
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Case diameter:
-                    </Text>{' '}
-                    42 mm
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Dial color:
-                    </Text>{' '}
-                    Black
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Crystal:
-                    </Text>{' '}
-                    Domed, scratch‑resistant sapphire crystal with anti‑reflective
-                    treatment inside
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Water resistance:
-                    </Text>{' '}
-                    5 bar (50 metres / 167 feet){' '}
-                  </ListItem>
-                </List>
+                
               </Box>
             </Stack>
   
-            <Button
-              rounded={'none'}
-              w={'full'}
-              mt={8}
-              size={'lg'}
-              py={'7'}
-              bg={'-moz-initial'}
-              color={'white'}
-              textTransform={'uppercase'}
-              _hover={{
-                transform: 'translateY(2px)',
-                boxShadow: 'lg',
-              }}>
-              Add to cart
-            </Button>
-  
-            <Stack direction="row" alignItems="center" justifyContent={'center'}>
-              <Text>2-3 business days delivery</Text>
-            </Stack>
+            <HStack> loudness
+      <CircularProgress value={props.base_noise_level}  size='120px' color='green.400'>
+  <CircularProgressLabel>{props.base_noise_level}</CircularProgressLabel>
+</CircularProgress>
+busyness
+<CircularProgress value={props.busyness}   size='120px' color='green.400'>
+  <CircularProgressLabel>{props.busyness}</CircularProgressLabel>
+</CircularProgress>
+<Rating readonly initialValue={props.rating}></Rating>
+      <Text color='blue.600' fontSize='2xl'>
+        {props.rating}/5
+      </Text></HStack>
+           
           </Stack>
         </SimpleGrid>
         <CustomGoogleMap w='100%' h='500px' lat={props.latitude} long={props.longitude}></CustomGoogleMap>

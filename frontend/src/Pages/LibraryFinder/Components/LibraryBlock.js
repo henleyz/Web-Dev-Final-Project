@@ -30,8 +30,14 @@ const LibraryBlock = (props) => {
 
   let hrefLink = '/library/' + props.name.replace(/ /g,'');
 
+<<<<<<< Updated upstream
   const content = (data===undefined) ? <div> loading </div> : 
+=======
+  const content = (data===undefined) ? <div> loading </div> :
+  
+>>>>>>> Stashed changes
 <Stack padding={'5'} mineight="300px">
+<Link href={hrefLink}>
 <Card 
   direction={{ base: 'column', sm: 'row' }}
   overflow='hidden'
@@ -82,7 +88,7 @@ busyness
     </CardFooter>
   
   </Stack>
-</Card>
+</Card></Link>
 
 
 

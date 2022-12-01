@@ -80,7 +80,11 @@ const Reviews = (props) => {
         const title = document.getElementById('title').value;
         const body = document.getElementById('body').value;
         console.log(rattting)
-        axios.post("http://localhost:3000/review/post/",{library: LibraryName, title: title, body:body, rate:rattting}).then(getReviews())
+        console.log(title)
+        console.log(body)
+        axios.post("http://localhost:3000/review/post/?library="+ LibraryName +"&title="+title +"&body=" + body + "&rate=" + rattting
+        
+        , {library: LibraryName, title: title, body:body, rate:rattting}).then(window.location.reload(false))
 
         
     }
@@ -91,8 +95,9 @@ const Reviews = (props) => {
         setList([]);
         console.log("oski")
         axios.get("http://localhost:3000/review/",{params:{library:props.name}})
-        .then((body) => setData(body.data)) 
+        .then((body) => setData(body.data))
        .catch((error) => console.log(error));
+       
             
     for (const review of data) {
        update(review); 
@@ -104,7 +109,7 @@ const Reviews = (props) => {
         return(
             <Box>
                 <SubmitReviewForm></SubmitReviewForm>
-                <Box>{posts}</Box>
+                <Box flex-direction= "row">{posts}</Box>
             </Box>
             
 

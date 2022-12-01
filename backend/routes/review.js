@@ -22,7 +22,12 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/post", async (req, res) => {
-    const {library, title, body, rate} = req.body; // Create a review and save into the db
+    const library = req.query.library
+    const title = req.query.title
+    const body = req.query.body
+    const rate = req.query.rate
+    console.log(title)
+    console.log(body)
     console.log(rate)
     if(title == ''|| body == '' || rate === undefined){
         console.log("empty review")

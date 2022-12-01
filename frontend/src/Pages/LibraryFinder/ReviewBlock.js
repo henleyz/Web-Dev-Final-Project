@@ -1,7 +1,6 @@
 import {Box, Card, CardBody, Image, Stack, Heading, Text, Divider, CardFooter, ButtonGroup, Button} from "@chakra-ui/react"
 import { Rating } from "react-simple-star-rating";
 const ReviewBlock = (props) => {
-  console.log(props.rate)
     return(
       <Card maxW='sm'>
   <CardBody>
