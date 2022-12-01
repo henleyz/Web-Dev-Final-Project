@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { useParams,  } from "react-router-dom";
 import NavBar from './Components/NavBar.tsx';
 import dummyLibraryList from './dummyLibraryList';
+import CustomGoogleMap from './GoogleMap.tsx'
 
 import {
     Box,
@@ -20,6 +21,7 @@ import {
     VisuallyHidden,
     List,
     ListItem,
+    DrawerOverlay,
   } from '@chakra-ui/react';
 import Reviews from "./Reviews";
 import ReviewBlock from "./ReviewBlock";
@@ -104,14 +106,10 @@ const Library = () => {
                   color={'gray.500'}
                   fontSize={'2xl'}
                   fontWeight={'300'}>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore
+                  {props.short_description}
                 </Text>
                 <Text fontSize={'lg'}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                  aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                  maxime modi nam officiis porro, quae, quisquam quos
-                  reprehenderit velit? Natus, totam.
+                {props.long_description}
                 </Text>
               </VStack>
               <Box>
@@ -216,6 +214,7 @@ const Library = () => {
             </Stack>
           </Stack>
         </SimpleGrid>
+        <CustomGoogleMap w='100%' h='500px' lat={props.latitude} long={props.longitude}></CustomGoogleMap>
 <Reviews name={id}></Reviews>
       </Container>
          </div>
