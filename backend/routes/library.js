@@ -1,10 +1,11 @@
 const Library = require("../models/Library")
 const express = require("express");
 const router = express.Router();
+const updateHourAndBusyness = require("../middleware/updateHourAndBusyness")
 
-router.get("/", async (req, res) => {
+router.get("/", updateHourAndBusyness, async (req, res) => {
     const libname = req.query.libname
-    console.log(libname)
+    console.log("Get library info from :" + libname)
     try{
         let library = await Library.findOne({name: libname})
         if (!library) {
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/prefer", async (req, res) => {
+router.get("/prefer", updateHourAndBusyness, async (req, res) => {
     const isNear= req.query.isNear
     const isOpen= req.query.isOpen
     const isQuiet = req.query.isQuiet

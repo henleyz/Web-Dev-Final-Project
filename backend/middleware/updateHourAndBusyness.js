@@ -2,9 +2,11 @@ const Library = require("../models/Library")
 const fetch = require("node-fetch")
 
 module.exports = async function(req, res, next){
+    console.log("Starting update library info")
     let now = new Date().getHours()
     let libs = await Library.find({})
-    if (now == libs[0].current_hour && libs[0].busyness_info != null) {
+    if (now == libs[0].current_hour && libs[0].busyness_info != "No info") {
+        console.log("No need to update")
         next()
         return
     } else {
@@ -16,6 +18,7 @@ module.exports = async function(req, res, next){
             if (close_time < open_time) close_time += 24
             if (current >= library.open_time && current < library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
                 current = 1  // Is open                                   // Ex: open = 8, close 22, now = 23 => now = 0
+                console.log(library.name + " : is_open = "+ library.is_open)
             } else {
                 current = 0 // Is close
             }
