@@ -19,8 +19,8 @@ const LibaryList = () => {
     const [data, setData] = useState([]);
 
     useEffect(()=>{
-        getListHelper();
-    }, [data])
+        //getListHelper();
+    }, [])
 
     /* Use the map() function to render multiple Blocks! */
      // TODO: edit this variable
@@ -30,7 +30,7 @@ const LibaryList = () => {
         console.log(data)
     }
 
-    var posts = data && data.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
+    var posts = Array.isArray(data) && (data.length !== 0)  && data.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
 
     const getList = (open, busy, distance, loud, lat, lng) => {
         if(lat === null || lng === null) {
@@ -39,6 +39,12 @@ const LibaryList = () => {
         console.log("send api request with")
         console.log("isopen: "+ open  +" busy: "+busy +  "distance: " + distance + "loud: " + loud + "location: " + lat +", " +  lng+". ")
         axios.get("http://localhost:3000/library/prefer", {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng}).then((data) => setData(data))
+        console.log(data)
+        console.log("hi")
+        for (const library of data) {
+            update(library); 
+            console.log(library)
+         }
         //axios.get(`backendShit`, {timeout: 10 * 1000}).then((body) => {
 		//console.log("Received response from server : ", body.data);
 		//const libraries = body.data;
