@@ -14,6 +14,7 @@ const LibraryBlock = (props) => {
 
   const [loading, setloading] = useState(true);
   const [data, SetData] = useState();
+  const [open, setopen] = useState(false);
   useEffect(()=>{getData()}, [])
 
   const getData = () => {
@@ -25,8 +26,6 @@ const LibraryBlock = (props) => {
     console.log(data)
   }
 
-
-  
 
 
   let hrefLink = '/library/' + props.name.replace(/ /g,'');
@@ -40,6 +39,7 @@ const LibraryBlock = (props) => {
   minH="300px"
   maxH="300px"
   minW="100%"
+  backgroundColor={new Date().getHours() > data.open_time && new Date().getHours() < data.close_time ?  'white.100' : 'red.50'}
 >
   <Image //pictrue
     minH="300px"
@@ -53,6 +53,7 @@ const LibraryBlock = (props) => {
 
   <Stack>
     <CardBody>
+      <Heading size='md' color="red">{new Date().getHours() > data.open_time && new Date().getHours() < data.close_time ?  ' ' : 'CLOSED '}</Heading>
       <Heading size='md'>{data.full_name}</Heading>
       {data.open_time} - {data.close_time}
       <Text py='2'> 
@@ -60,8 +61,8 @@ const LibraryBlock = (props) => {
       </Text>
       <HStack></HStack>
       loudness
-      <CircularProgress value={data.loudness} color='green.400'>
-  <CircularProgressLabel>{data.loudness}</CircularProgressLabel>
+      <CircularProgress value={data.base_noise_level} color='green.400'>
+  <CircularProgressLabel>{data.base_noise_level}</CircularProgressLabel>
 </CircularProgress>
 busyness
 <CircularProgress value={data.busyness} color='green.400'>

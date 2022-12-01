@@ -49,7 +49,7 @@ const LibaryList = () => {
         console.log("send api request with")
         console.log("isopen: "+ open  +" busy: "+busy +  "distance: " + distance + "loud: " + loud + "location: " + lat +", " +  lng+". ")
         console.log((loud < 50)? 1 : 0  )
-        axios.get("http://localhost:3000/library/prefer",{params: {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng}})
+        axios.get("http://localhost:3000/library/prefer",{params: {isOpen:open ? 1 : 0, isBusy:busy, isNear:distance, isQuiet:loud, latitude:lat, longitude:lng}})
         .then((data) => setData(data.data)).catch((error) => console.log(error));
     }
     //     setList([]);

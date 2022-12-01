@@ -103,7 +103,7 @@ if (!business) {
         long_description:"The Thomas J. Long Business Library is your hub for business information at UC Berkeley. We'll help you find company, industry, and financial market data for your coursework, research, or job search.",
         image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-BUSINESS-02.jpg.webp?itok=9F1P2hpI",
         image2_link:"https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=e9vAYNJIaQmaX9iUA-1myQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=269.92892&pitch=0&thumbfov=100",
-        base_noise_level : 70,
+        base_noise_level : 10,
         venue_id: "ven_55645a645242433332476652415968387044734237596d4a496843"
     })
     business.save()
@@ -198,9 +198,18 @@ router.get("/prefer", async (req, res) => {
     }
     const CalculateScore = async (library) => {
         console.log("hi")
-        let distanceScore = 0
-        if (isNear == 1) distanceScore = 10000 * Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
-        let quietScore = library.base_noise_level - 50
+        let distanceScore = 0;
+        let estimatedUserRequestedDistance = isNear /1000;
+        
+        let distance = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
+
+        if (distance>estimatedUserRequestedDistance){
+                distanceScore = 1000000;
+        } else {
+            distanceScore = distance*10000;
+        }
+
+        let quietScore = Math.abs(library.base_noise_level - isQuiet)
         let now = new Date().getHours()
         let open_time = library.open_time
         let close_time = library.close_time
@@ -224,12 +233,12 @@ router.get("/prefer", async (req, res) => {
         setTimeout(() => {
         }, 100); // Manually setting time out
 
-        let busyScore = 50
+        let busyScore = Math.abs(isBusy - 50)
         // await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
         // .then(res => res.json()).then(data=>console.log(data))
         // .then(data => data.analysis.venue_live_busyness)
         // I need to get live business data
-        return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
+        return isNear * distanceScore +  quietScore +  busyScore
     }
     try{
         let libs = await Library.find({})
