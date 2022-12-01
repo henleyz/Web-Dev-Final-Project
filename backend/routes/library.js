@@ -1,6 +1,7 @@
 const Library = require("../models/Library")
 const express = require("express");
 const router = express.Router();
+const busyness = require("../routes/busyness");
 
 
 // let template = new Library({
@@ -140,20 +141,21 @@ router.get("/prefer", async (req, res) => {
         latitude_user = req.query.latitude
         longitude_user = req.query.longitude
     }
-    const CalculateScore = (library) => {
+    const CalculateScore = async (library) => {
         let distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude)))
         let quietScore = library.base_noise_level - 50
-        let busyScore = 0 // I need to get live business data
+        let busyScore = await busyness.get(`http://localhost:3000/busyness?libname=${library.name}}`) // I need to get live business data
         return isClose * distanceScore + isQuiet * quietScore + isBusy * busyScore
     }
     try{
-        
+        let lib = await Library.findOne({name: "moffit"})
+        console.log(await CalculateScore(lib))
+        res.send({msg: "Success"})
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
     }
 })
 
-router.get("/")
 
 module.exports = router
