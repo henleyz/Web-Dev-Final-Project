@@ -108,6 +108,63 @@ if (!business) {
     })
     business.save()
 }
+
+let bancroft = await Library.findOne({name: "bancroft"})
+if (!bancroft) {
+    bancroft = new Library({
+        name:"bancroft",
+        full_name: "Bancroft Library",
+        open_time:10,
+        close_time:16,
+        latitude:37.872361720548746,
+        longitude:-122.25851615874734,
+        short_description:"Find rare books here !",
+        long_description:"The Bancroft Library is the primary special collections library at UC Berkeley, and one of the largest and most heavily used libraries of manuscripts, rare books, and unique materials in the United States. Bancroft supports major research and instructional activities and plays a leading role in the development of the university's research collections.",
+        image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/BANC-06515.jpg.webp?itok=koeFZNaE",
+        image2_link:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR38w3vEP1Y-OOk0KW3GrljFH_4e-x1-pj9eg&usqp=CAU",
+        base_noise_level : 50,
+        venue_id: "ven_6b6848532d444c57624541524159683856435343705a6f4a496843"
+    })
+    bancroft.save()
+}
+
+let doe = await Library.findOne({name: "doe"})
+if (!doe) {
+    doe = new Library({
+        name:"doe",
+        full_name: "Bancroft Library",
+        open_time:8,
+        close_time:16,
+        latitude:37.87238039710386,
+        longitude:-122.25880754894214,
+        short_description:"Immerse yourself in a beautiful library.",
+        long_description:"Doe Library supports the teaching, research, and instructional needs associated with more than 50 academic departments and programs in the Arts and Humanities, Social Sciences, and International and Area Studies. The Doe Library building is home to several libraries and is connected to the Main (Gardner) Stacks, where the collections of Doe and Moffitt libraries are shelved.",
+        image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-Doe-05041.jpg.webp?itok=3yp7XnLo",
+        image2_link:"https://upload.wikimedia.org/wikipedia/commons/9/9a/Doe_Library%2C_main_facade%2C_July_2018.jpg",
+        base_noise_level : 50,
+        venue_id: "ven_4d433362757470306b4b715241596838526949705851484a496843"
+    })
+    doe.save()
+}
+
+let eastasian = await Library.findOne({name: "eastasian"})
+if (!eastasian) {
+    eastasian = new Library({
+        name:"eastasian",
+        full_name: "C. V. Starr East Asian Library",
+        open_time:9,
+        close_time:17,
+        latitude:37.87374505939565,
+        longitude:-122.25940024531846,
+        short_description:"Really great facilities and view.",
+        long_description:"The C. V. Starr East Asian Library (EAL) contains one of the most comprehensive collections of materials in East Asian languages in the United States. Its combined holdings, totaling over 1 million print volumes in Chinese, Japanese, Korean, and other East Asian languages, make it one of the top two such collections in the U.S. outside of the Library of Congress.",
+        image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-EAL-4692.jpg.webp?itok=7pfe3ClH",
+        image2_link:"https://give.lib.berkeley.edu/sites/default/files/inline-images/EALbuilding04.jpg",
+        base_noise_level : 60,
+        venue_id: "ven_49563459436d73422d656852415968385a6968774351414a496843"
+    })
+    eastasian.save()
+}
 }
 
 createLibrary();
@@ -141,7 +198,7 @@ router.get("/prefer", async (req, res) => {
     }
     const CalculateScore = async (library) => {
         let distanceScore = 0
-        if (isNear == 1) distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
+        if (isNear == 1) distanceScore = 10000 * Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
         let now = new Date().getHours()
         let open_time = library.open_time
@@ -153,10 +210,12 @@ router.get("/prefer", async (req, res) => {
             now = 0 // Is close
         }
         if (now != 1 && isOpen == 1) {
-            return Infinity
+            return Infinity // lowest priority
         }
+
         setTimeout(() => {
         }, 100); // Manually setting time out
+
         let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
         .then(res => res.json())
         .then(data => data.analysis.venue_live_busyness)

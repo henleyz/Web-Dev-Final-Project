@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 
 router.get("/", async (req, res) => {
     const libname = req.query.libname
-    console.log("Getting api for " + libname);
+    console.log("Getting live busyness data for " + libname);
     try{
         let library = await Library.findOne({name: libname})
         if (!library) {
