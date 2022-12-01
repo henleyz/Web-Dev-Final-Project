@@ -33,7 +33,7 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
 
     const CalculateScore = async (library) => { // Score calculation 
         let distanceScore = 0
-        let estimatedUserRequestedDistance = isNear /1000;
+        let estimatedUserRequestedDistance = isNear / 2000;
         let distance = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         if (distance>estimatedUserRequestedDistance){
                 distanceScore = 10000;

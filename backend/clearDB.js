@@ -138,7 +138,7 @@ const createLibrary = async () => {
     if (!doe) {
         doe = new Library({
             name:"doe",
-            full_name: "Bancroft Library",
+            full_name: "Doe Library",
             open_time:8,
             close_time:16,
             latitude:37.87238039710386,
