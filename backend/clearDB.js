@@ -36,7 +36,7 @@ const createLibrary = async () => {
             long_description : "The Kresge Engineering Library is a meeting and study hub in the Bechtel Engineering Center. Our extensive collections and services support the research and teaching programs of the College of Engineering and beyond. ",
             image1_link : "https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-engineering-.jpg.webp?itok=kIqyqIKE",
             image2_link : "https://lh5.googleusercontent.com/p/AF1QipON-jkYMcZ-fR1qI2x1LqGBhM1fHAVRBhXui5Fu=w408-h306-k-no",
-            base_noise_level: 70,
+            base_noise_level: 90,
             venue_id: "ven_496a6c6172504976315a4c52415968384e7969734234464a496843"
         })
         kresge.save()
@@ -73,7 +73,7 @@ const createLibrary = async () => {
             long_description:"The David Pierpont Gardner Stacks is a large multi-level space housing 2.3 million volumes, of the approximately 4.5 million volumes that constitute Doe Library’s research collection. Access to the Main (Gardner) Stacks is via Moffitt Library or Doe Library. Open tables, study carrels, and group study rooms are arranged throughout the floors and serve as a primary study area for UC Berkeley students and faculty.",
             image1_link:"https://i.pinimg.com/originals/69/06/37/6906377a15dd28c53b3f5c7b75cf952e.jpg",
             image2_link:"https://live.staticflickr.com/7582/28551141222_5a4227da65_b.jpg",
-            base_noise_level: 50,
+            base_noise_level: 20,
             venue_id: "ven_385048586949466a2d447552415968393556786f7035514a496843",
         })
         mainstack.save()

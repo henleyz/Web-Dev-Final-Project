@@ -30,12 +30,8 @@ const LibraryBlock = (props) => {
 
   let hrefLink = '/library/' + props.name.replace(/ /g,'');
 
-<<<<<<< Updated upstream
-  const content = (data===undefined) ? <div> loading </div> : 
-=======
   const content = (data===undefined) ? <div> loading </div> :
   
->>>>>>> Stashed changes
 <Stack padding={'5'} mineight="300px">
 <Link href={hrefLink}>
 <Card 
@@ -45,7 +41,7 @@ const LibraryBlock = (props) => {
   minH="300px"
   maxH="300px"
   minW="100%"
-  backgroundColor={new Date().getHours() >= data.open_time && new Date().getHours() <= data.close_time ?  'white.100' : 'red.50'}
+  backgroundColor={new Date().getHours() >= data.open_time && new Date().getHours() <= ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time) ?  'white.100' : 'red.50'}
 >
   <Image //pictrue
     minH="300px"
@@ -59,7 +55,7 @@ const LibraryBlock = (props) => {
 
   <Stack>
     <CardBody>
-      <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() <= data.close_time ?  ' ' : 'CLOSED '}</Heading>
+      <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() <= ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time)?  ' ' : 'CLOSED '}</Heading>
       <Heading size='md'>{data.full_name}</Heading>
       {data.open_time} - {data.close_time}
       <Text py='2'> 
@@ -80,11 +76,10 @@ busyness
       </Text>
     </CardBody>
 
-    <CardFooter><Link href={hrefLink}>
+    <CardFooter>
       <Button variant='solid' colorScheme='blue'>
         vistit
-      </Button></Link>
-      
+      </Button>
     </CardFooter>
   
   </Stack>
