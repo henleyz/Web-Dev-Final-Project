@@ -5,7 +5,7 @@ const updateHourAndBusyness = require("../middleware/updateHourAndBusyness")
 
 router.get("/", updateHourAndBusyness, async (req, res) => {
     const libname = req.query.libname
-    console.log("Get library info from :" + libname)
+    console.log("Get library info from : " + libname)
     try{
         let library = await Library.findOne({name: libname})
         if (!library) {
