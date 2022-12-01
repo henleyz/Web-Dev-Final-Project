@@ -53,7 +53,7 @@ const LibraryBlock = (props) => {
 
   <Stack>
     <CardBody>
-      <Heading size='md'>{props.name}</Heading>
+      <Heading size='md'>{data.full_name}</Heading>
       {data.open_time} - {data.close_time}
       <Text py='2'> 
 {data.short_description}                                           

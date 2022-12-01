@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
-const { list } = require("tar");
+//const { list } = require("tar");
 const LibraySchema = mongoose.Schema({
     name: {
+        type: String,
+        required: true 
+    },
+    full_name: {
         type: String,
         required: true 
     },

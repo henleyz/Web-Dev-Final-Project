@@ -14,10 +14,10 @@ const ReviewBlock = (props) => {
       <Text>
         {props.body}
       </Text>
-      <Rating readonly initialValue={props.rate}></Rating>
+      <Rating readonly allowFraction initialValue={props.rate}></Rating>
       <Text color='blue.600' fontSize='2xl'>
         {props.rating}
-      </Text>
+      </Text> 
     </Stack>
   </CardBody>
   <Divider />
