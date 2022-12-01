@@ -1,8 +1,7 @@
 const Library = require("../models/Library")
 const express = require("express");
 const router = express.Router();
-const busyness = require("../routes/busyness");
-
+const fetch = require("node-fetch");
 
 // let template = new Library({
 //     name:,
@@ -127,25 +126,36 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/prefer", async (req, res) => {
-    const isClose = req.query.isClose
+    const isNear= req.query.isNear
+    const isOpen= req.query.isOpen
     const isQuiet = req.query.isQuiet
     const isBusy = req.query.isBusy
     let latitude_user = null
     let longitude_user = null
-    if (isClose == "1"){
+    if (isNear == 1){
         latitude_user = req.query.latitude
         longitude_user = req.query.longitude
     }
     const CalculateScore = async (library) => {
-        let distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude)))
+        let distanceScore = 0
+        if (isNear == 1) distanceScore = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
-        let busyScore = await busyness.get(`http://localhost:3000/busyness?libname=${library.name}}`) // I need to get live business data
-        return isClose * distanceScore + isQuiet * quietScore + isBusy * busyScore
+        let open = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
+        .then(res => res.json())
+        .then(data => data.venue_info.venue_open)
+        console.log(open)
+        if (open != "Open" && isOpen == 1) {
+            return Infinity
+        }
+        let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
+        .then(res => res.json())
+        .then(data => data.analysis.venue_live_busyness)
+        // I need to get live business data
+        return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
     }
     try{
-        let lib = await Library.findOne({name: "moffit"})
-        console.log(await CalculateScore(lib))
-        res.send({msg: "Success"})
+        let libs = await Library.aggregate([{$project: {score:CalculateScore()}}]).sort({score: -1}).limit(5) //5 libraries with least score
+        res.send(JSON.stringify(libs))
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
