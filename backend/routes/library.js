@@ -225,7 +225,8 @@ router.get("/prefer", async (req, res) => {
     try{
         let libs = await Library.find({})
         libs.sort((x, y) => CalculateScore(x) - CalculateScore(y))
-        res.send(JSON.stringify(libs))
+        let newlist = libs.map((lib) => lib.name)
+        res.send(JSON.stringify(newlist))
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
