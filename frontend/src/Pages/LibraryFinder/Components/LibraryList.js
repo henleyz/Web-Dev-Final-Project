@@ -48,13 +48,15 @@ const LibaryList = () => {
         //  }}
         console.log("send api request with")
         console.log("isopen: "+ open  +" busy: "+busy +  "distance: " + distance + "loud: " + loud + "location: " + lat +", " +  lng+". ")
-        axios.get("http://localhost:3000/library/prefer", {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng})
+        console.log((loud < 50)? 1 : 0  )
+        axios.get("http://localhost:3000/library/prefer",{params: {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng}})
         .then((data) => setData(data.data)).catch((error) => console.log(error));
     }
     //     setList([]);
     //     //sample data
     //     const libraries = ["moffit", "kresge", "mainstack", "business"]
     function confirm(){
+        setList([])
         console.log(data)
         if (data === []){
             return
@@ -72,14 +74,14 @@ const LibaryList = () => {
     const getListHelper = () => {
         getList(open, busy, distance, loud, lat, lng)
     }
-    function updateSearchParameters(o, b, d, l, lat, lng){
-        setOpen(o);
-        setBusy(b);
-        setDistance(d);
-        setLoud(l);
-        setLat(lat);
-        setLng(lng);
-        getListHelper();
+    async function updateSearchParameters(o, b, d, l, lat, lng){
+        await setOpen(o);
+        await setBusy(b);
+        await setDistance(d);
+        await setLoud(l);
+        await setLat(lat);
+        await setLng(lng);
+        getList(o,b,d,l,lat,lng);
     }
 
     

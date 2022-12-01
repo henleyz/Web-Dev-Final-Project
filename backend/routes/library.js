@@ -197,6 +197,7 @@ router.get("/prefer", async (req, res) => {
         longitude_user = req.query.longitude
     }
     const CalculateScore = async (library) => {
+        console.log("hi")
         let distanceScore = 0
         if (isNear == 1) distanceScore = 10000 * Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
@@ -223,21 +224,29 @@ router.get("/prefer", async (req, res) => {
         setTimeout(() => {
         }, 100); // Manually setting time out
 
-        let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
-        .then(res => res.json())
-        .then(data => data.analysis.venue_live_busyness)
+        let busyScore = 50
+        // await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
+        // .then(res => res.json()).then(data=>console.log(data))
+        // .then(data => data.analysis.venue_live_busyness)
         // I need to get live business data
         return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
     }
     try{
         let libs = await Library.find({})
-        libs.sort((x, y) => CalculateScore(x) - CalculateScore(y))
-        let newlist = libs.map((lib) => lib.name)
+        let libKeys = libs.map(x => x.name);
+        let libValues = await Promise.all(libs.map(async (x) => await CalculateScore(x)))
+        var libmap = libKeys.map(function(e, i) {
+            return [e, libValues[i]];
+          });
+        libmap.sort((x,y) => x[1]-y[1])
+        console.log(libmap)
+        let newlist = libmap.map((x) => x[0])
+        console.log(newlist)
         res.send(JSON.stringify(newlist))
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
-    }
+    }   
 })
 
 
