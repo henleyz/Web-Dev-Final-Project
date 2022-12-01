@@ -35,20 +35,23 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
         let distanceScore = 0
         let estimatedUserRequestedDistance = isNear /1000;
         let distance = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
-        if (distance>estimatedUserRequestedDistance){
+        if (distance > estimatedUserRequestedDistance){
             return Infinity;
         } else {
-            distanceScore = distance*1000;
+            distanceScore = distance * 1000;
         }
 
         let quietScore = Math.abs(library.base_noise_level - isQuiet)
         let busy = 0
+
         if (library.busyness_info.analysis.venue_live_busyness_available) {
             busy = library.busyness_info.analysis.venue_live_busyness
         } else if (library.busyness_info.analysis.venue_forecast_busyness_available) {
             busy = library.busyness_info.analysis.venue_forecast_busyness
         }
+
         let busyScore = Math.abs(isBusy - busy)
+
         if (library.is_open != 1 && isOpen == 1) {
             return Infinity // lowest priority
         }
