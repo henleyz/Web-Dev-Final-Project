@@ -19,62 +19,71 @@ const LibaryList = () => {
     const [data, setData] = useState([]);
 
     useEffect(()=>{
-        //getListHelper();
+        confirm();
+        console.log(data)
+    }, [data])
+
+    useEffect(()=>{
+        getListHelper()
     }, [])
 
-    /* Use the map() function to render multiple Blocks! */
-     // TODO: edit this variable
 
     const update = (props) => {
         setList(posts => [props, ...posts]);
         console.log(data)
     }
 
-    var posts = Array.isArray(data) && (data.length !== 0)  && data.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
+    var posts = Array.isArray(list) && (list.length !== 0)  && list.map((i) => <LibraryBlock key={i} name={i}></LibraryBlock>);
 
-    const getList = (open, busy, distance, loud, lat, lng) => {
+     function getList(open, busy, distance, loud, lat, lng) {
         if(lat === null || lng === null) {
             distance = 100;
-        }
+        }        
+        // async function generateBlocks(){
+        //     console.log(data)
+        // for (const library of data) {
+            
+        //     update(library); 
+        //     console.log(library)
+        //  }}
         console.log("send api request with")
         console.log("isopen: "+ open  +" busy: "+busy +  "distance: " + distance + "loud: " + loud + "location: " + lat +", " +  lng+". ")
-        axios.get("http://localhost:3000/library/prefer", {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng}).then((data) => setData(data))
-        console.log(data)
-        console.log("hi")
-        for (const library of data) {
-            update(library); 
-            console.log(library)
-         }
-        //axios.get(`backendShit`, {timeout: 10 * 1000}).then((body) => {
-		//console.log("Received response from server : ", body.data);
-		//const libraries = body.data;
+        console.log((loud < 50)? 1 : 0  )
+        axios.get("http://localhost:3000/library/prefer",{params: {isOpen:open ? 1 : 0, isBusy:(busy > 50)? 1 : 0, isNear:(distance<50)? 1 : 0, isQuiet:(loud < 50)? 1 : 0, latitude:lat, longitude:lng}})
+        .then((data) => setData(data.data)).catch((error) => console.log(error));
     }
     //     setList([]);
     //     //sample data
     //     const libraries = ["moffit", "kresge", "mainstack", "business"]
+    function confirm(){
+        setList([])
+        console.log(data)
+        if (data === []){
+            return
+        } else{
+        var copy = data.map((x) => x);
+        copy.reverse();
+        for(const library of copy) {
+            update(library)
+        }
+    }
+    }
 
-    
-    //     libraries.reverse();
-    //     for(const library of libraries) {
-    //         update(library)
-    //     }
     // }
 
     const getListHelper = () => {
         getList(open, busy, distance, loud, lat, lng)
     }
-    function updateSearchParameters(o, b, d, l, lat, lng){
-        setOpen(o);
-        setBusy(b);
-        setDistance(d);
-        setLoud(l);
-        setLat(lat);
-        setLng(lng);
-        getListHelper();
+    async function updateSearchParameters(o, b, d, l, lat, lng){
+        await setOpen(o);
+        await setBusy(b);
+        await setDistance(d);
+        await setLoud(l);
+        await setLat(lat);
+        await setLng(lng);
+        getList(o,b,d,l,lat,lng);
     }
-    let show = function() {
-        console.log('Anonymous function');
-    };
+
     
 
    return (           <div> <Show below="1000px">
@@ -82,7 +91,7 @@ const LibaryList = () => {
             </Show>
         <Flex margin="10">
             <Show above='1000px'> 
-            <Form data={{open:open, busy:busy, distance:distance, loud:loud}} minW="3000" func={show} apply={updateSearchParameters}></Form>
+            <Form data={{open:open, busy:busy, distance:distance, loud:loud}} minW="3000"  apply={updateSearchParameters}></Form>
             </Show>
            
 

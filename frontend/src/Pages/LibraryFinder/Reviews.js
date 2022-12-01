@@ -28,13 +28,8 @@ const Reviews = (props) => {
         setList(posts => [props, ...posts]);
     }
     
-     async function getReviewsHelper () {
-        await timeout(10);
-        getReviews();
-    }
-    async function timeout(delay) {
-        return new Promise( res => setTimeout(res, delay) );
-    }
+
+
     const SubmitReviewForm = () => {
         const UsernameForm = () => { 
         if(1 === null) {

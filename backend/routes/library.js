@@ -197,14 +197,22 @@ router.get("/prefer", async (req, res) => {
         longitude_user = req.query.longitude
     }
     const CalculateScore = async (library) => {
+        console.log("hi")
         let distanceScore = 0
         if (isNear == 1) distanceScore = 10000 * Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         let quietScore = library.base_noise_level - 50
         let now = new Date().getHours()
         let open_time = library.open_time
         let close_time = library.close_time
-        if (close_time < open_time) close_time += 24
-        if (now >= library.open_time && now < library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
+
+        if (close_time < open_time) {
+            if (now <= close_time){
+                now += 24;
+            }
+            close_time += 24;
+        }
+
+         if (now >= library.open_time && now < library.close_time) { // Ex: open = 8, close 6,  now = 7 => now = 0
             now = 1  // Is open                                   // Ex: open = 8, close 22, now = 23 => now = 0
         } else {
             now = 0 // Is close
@@ -215,12 +223,14 @@ router.get("/prefer", async (req, res) => {
 
         setTimeout(() => {
         }, 100); // Manually setting time out
+
         // if (library.busyness_info == null) {
         //     let info = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
         //     .then(res => res.json())
         // }
         // let busyScore = await fetch(`http://localhost:3000/busyness?libname=${library.name}`)
         // .then(res => res.json())
+
         // .then(data => data.analysis.venue_live_busyness)
         // I need to get live business data
         // return isNear * distanceScore + isQuiet * quietScore + isBusy * busyScore
@@ -228,17 +238,20 @@ router.get("/prefer", async (req, res) => {
     }
     try{
         let libs = await Library.find({})
-        console.log(libs.map((lib) => lib.name))
-        libs.sort((x, y) => CalculateScore(x) - CalculateScore(y))
-        let newlist = libs.map((lib) => lib.name)
-        let scorelist = libs.map((lib) => CalculateScore(lib))
+        let libKeys = libs.map(x => x.name);
+        let libValues = await Promise.all(libs.map(async (x) => await CalculateScore(x)))
+        var libmap = libKeys.map(function(e, i) {
+            return [e, libValues[i]];
+          });
+        libmap.sort((x,y) => x[1]-y[1])
+        console.log(libmap)
+        let newlist = libmap.map((x) => x[0])
         console.log(newlist)
-        console.log(scorelist)
-        res.send(JSON.stringify(newlist)) // get names
+        res.send(JSON.stringify(newlist))
     } catch(e){
         console.log(e)
         res.status(500).send("Error in fetching prefered library");
-    }
+    }   
 })
 
 
