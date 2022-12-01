@@ -65,6 +65,10 @@ const LibraySchema = mongoose.Schema({
     busyness_info: {
         type: mongoose.Schema.Types.Mixed,
         default: null
+    },
+    is_open:{
+        type: Number,
+        default: 1
     }
 
 })
