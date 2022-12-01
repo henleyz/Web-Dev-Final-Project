@@ -57,6 +57,18 @@ const LibraySchema = mongoose.Schema({
     },
     base_noise_level: {
         type: Number
+    },
+    current_hour: {
+        type: Number,
+        default: new Date().getHours()
+    },
+    busyness_info: {
+        type: mongoose.Schema.Types.Mixed,
+        default: null
+    },
+    is_open:{
+        type: Number,
+        default: 1
     }
 
 })
