@@ -5,7 +5,7 @@ const updateHourAndBusyness = require("../middleware/updateHourAndBusyness")
 
 router.get("/", updateHourAndBusyness, async (req, res) => {
     const libname = req.query.libname
-    console.log("Get library info from :" + libname)
+    console.log("Get library info from : " + libname)
     try{
         let library = await Library.findOne({name: libname})
         if (!library) {
@@ -43,7 +43,13 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
         }
 
         let quietScore = Math.abs(library.base_noise_level - isQuiet)
-        let busyScore = Math.abs(isBusy - library.busyness_info.analysis.venue_live_busyness)
+        let busy = 0
+        if (library.busyness_info.analysis.venue_live_busyness_available) {
+            busyScore = library.busyness_info.analysis.venue_live_busyness
+        } else if (library.busyness_info.analysis.venue_forecast_busyness_available) {
+            busyScore = library.busyness_info.analysis.venue_forecast_busyness
+        }
+        let busyScore = Math.abs(isBusy - busy)
         if (library.is_open != 1 && isOpen == 1) {
             return Infinity // lowest priority
         }
