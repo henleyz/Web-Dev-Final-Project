@@ -62,7 +62,7 @@ const LibraryBlock = (props) => {
       <Text py='2'> 
 {data.short_description}                                           
       </Text>
-      <Box display='flex' flexDirection='row' width='15rem'>
+      <Box display='flex' flexDirection='row' width='15rem' alignSelf='center'>
         <Box display='flex' alignSelf='center' flexDirection='column' alignItems='ceter' justifyContent='center' placeItems='center'>Loudness
         <CircularProgress size="70px" value={data.base_noise_level} color='green.400'>
         <CircularProgressLabel>{data.base_noise_level}</CircularProgressLabel>
@@ -75,11 +75,13 @@ const LibraryBlock = (props) => {
           </CircularProgress>
         </Box>
         </Box>
-<HStack marginTop='20px'><Rating readonly initialValue={data.rating} size="15"></Rating>
+        <Spacer/>
+<HStack justifyContent='center'><Rating readonly initialValue={data.rating} size="15"></Rating>
       <Text color='blue.600' fontSize='1l'>
  {data.total_reviews} Reviews
       </Text>
       </HStack>
+      <Spacer/>
       <Spacer/>
       <Button variant='solid' colorScheme='blue' alignSelf='center'>
         Visit

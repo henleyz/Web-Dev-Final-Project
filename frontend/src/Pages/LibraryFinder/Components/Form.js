@@ -58,7 +58,7 @@ function updateSearchParameters(o, b, d, l){
         <p>{status}</p>
         {lat && <p>Latitude: {lat}</p>}
         {lng && <p>Longitude: {lng}</p>}
-        <Checkbox defaultChecked onChange={(e) => setOpen(e.target.checked)}>Is Open</Checkbox>
+        <Checkbox defaultChecked onChange={(e) => setOpen(e.target.checked)}>Open</Checkbox>
 <Box>Loudness <SliderMarkExample returnValue={setLoud} begin="Silent" middle="Lively" end="Loud"></SliderMarkExample>
 </Box>
 <Box>Distance <SliderMarkExample returnValue={setDistance} begin="Close" middle="Walkable" end="Bikable"></SliderMarkExample>
