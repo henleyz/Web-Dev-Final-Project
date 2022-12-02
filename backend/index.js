@@ -13,15 +13,16 @@ const PORT = process.env.PORT || 3000
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", user)
-app.use("/library", library)
 app.use("/review", review)
 app.use("/busyness", busyness)
 
-// Change to true when you don't want to restart the database
-if (true) {
+// Change to true when you want to restart the database
+if (false) {
     const clear = require("./clearDB");
-    app.use("/clearDB", clear)
+    app.use(clear);
 }
+
+app.use("/library", library)
 
 app.get("/", (req, res) => { 
     res.json({ message: "API Working" });

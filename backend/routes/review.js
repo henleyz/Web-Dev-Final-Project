@@ -49,11 +49,12 @@ router.post("/post", async (req, res) => {
         review.save()
 
         let lib = await Library.findOne({name: library})
+        let newrate = ((lib.total_rate + +rate)/(lib.total_reviews + 1)).toFixed(1) //rate is a string +rate convert rate into number
         await Library.updateOne(
             {name: library},
             {
             $inc: {total_reviews: 1, total_rate: rate},
-            $set: {rating:((lib.total_rate + rate)/(lib.total_reviews + 1)).toFixed(1)}})
+            $set: {rating: newrate}})
         return res.send(JSON.stringify(review));
     } catch(e) {
         console.log(e);
