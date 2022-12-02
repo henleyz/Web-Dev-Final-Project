@@ -53,16 +53,17 @@ function updateSearchParameters(o, b, d, l){
     return(
        <Box marginLeft="2%"minW="400" backgroundColor={'blue.100'} padding="50px" borderRadius={"5px"}>
         <Button onClick={getLocation}>get location</Button>
-        <Heading>location</Heading>
+        <Box marginTop="20px" marginBottom="20px" padding='10px' paddingLeft='20px' paddingRight='20px' backgroundColor={"blue.50"} borderRadius="10px">
         <p>{status}</p>
         {lat && <p>Latitude: {lat}</p>}
-        {lng && <p>Longitude: {lng}</p>}
-        <Checkbox defaultChecked onChange={(e) => setOpen(e.target.checked)}>Is Open</Checkbox>
-<Box>Loudness <SliderMarkExample returnValue={setLoud} begin="silent" middle="lively" end="loud"></SliderMarkExample>
+        {lng && <p>Longitude: {lng}</p>}</Box>
+        <Box  marginTop="20px"  marginBottom="20px" padding='10px' paddingLeft='20px' paddingRight='20px' backgroundColor={"blue.50"} borderRadius="10px"><Checkbox defaultChecked onChange={(e) => setOpen(e.target.checked)}>Is Open</Checkbox></Box>
+        
+<Box  marginBottom="20px" padding='10px' paddingLeft='20px' paddingRight='20px' backgroundColor={"blue.50"} borderRadius="10px">Loudness <SliderMarkExample returnValue={setLoud} begin="silent" middle="lively" end="loud"></SliderMarkExample>
 </Box>
-<Box>Distance <SliderMarkExample returnValue={setDistance} begin="lazy" middle="walkable" end="bikable"></SliderMarkExample>
+<Box  marginBottom="20px"  padding='10px' paddingLeft='20px' paddingRight='20px' backgroundColor={"blue.50"} borderRadius="10px">Distance <SliderMarkExample returnValue={setDistance} begin="lazy" middle="walkable" end="bikable"></SliderMarkExample>
 </Box>
-<Box>Busyness <SliderMarkExample returnValue={setBusy} begin="empty" middle="average" end="good luck finding a seat"></SliderMarkExample>
+<Box marginBottom="20px"  padding='10px' paddingLeft='20px' paddingRight='20px' backgroundColor={"blue.50"} borderRadius="10px">Busyness <SliderMarkExample returnValue={setBusy} begin="empty" middle="average" end="good luck finding a seat"></SliderMarkExample>
 </Box>
 <Button onClick={applyAndClose}>Apply FIlters</Button>
 
