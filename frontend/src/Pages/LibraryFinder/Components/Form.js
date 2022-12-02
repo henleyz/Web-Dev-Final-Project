@@ -20,6 +20,7 @@ useEffect(()=>{
         props.data.busy, 
         props.data.distance, 
         props.data.loud)
+    getLocation()
     // do stuff here...
 }, [])
 //if(props.isLoggedIn){
