@@ -33,12 +33,12 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
 
     const CalculateScore = async (library) => { // Score calculation 
         let distanceScore = 0
-        let estimatedUserRequestedDistance = isNear /1000;
+        let estimatedUserRequestedDistance = isNear / 2000;
         let distance = Math.sqrt(Math.pow((latitude_user - library.latitude), 2) + Math.pow((longitude_user - library.longitude),2))
         if (distance>estimatedUserRequestedDistance){
                 distanceScore = 10000;
         } else {
-            distanceScore = distance*1000;
+            distanceScore = distance * 1000;
         }
         let currentBusy =0;
         if (library.busyness_info.analysis.venue_live_busyness_available) {
@@ -50,8 +50,7 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
         let busyScore = Math.abs(isBusy - currentBusy)
         if (library.is_open != 1 && isOpen == 1) {
             return Infinity // lowest priority
-        }
-        
+        } 
         return  distanceScore +  quietScore +  (busyScore || 0)
     }
 
