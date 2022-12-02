@@ -105,6 +105,24 @@ if (!business) {
     })
     business.save()
 }
+
+let doe = await Library.find({name: 'doe'});
+if (!doe) {
+    doe = new Library({
+        name:"doe",
+        open_time:800,
+        close_time:2100,
+        latitude:37.8722,
+        longitude:-122.2596,
+        short_description: "Immerse yourself in a beautiful library.",
+        long_description:"Doe Library supports the teaching, research, and instructional needs associated with more than 50 academic departments and programs in the Arts and Humanities, Social Sciences, and International and Area Studies. The Doe Library building is home to several libraries and is connected to the Main (Gardner) Stacks, where the collections of Doe and Moffitt libraries are shelved.",
+        image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-Doe-05041.jpg.webp?itok=3yp7XnLo",
+        image2_link:"https://upload.wikimedia.org/wikipedia/commons/9/9a/Doe_Library%2C_main_facade%2C_July_2018.jpg",
+        base_noise_level : 0,
+        venue_id: "ven_4d433362757470306b4b715241596838526949705851484a496843"
+    })
+    doe.save()
+}
 }
 
 createLibrary();
