@@ -12,7 +12,7 @@ function SliderMarkExample(props) {
     const [sliderValue, setSliderValue] = useState(50)
   
     const labelStyles = {
-      mt: '2',
+      mt: '1',
       ml: '-2.5',
       fontSize: '10',
     }
