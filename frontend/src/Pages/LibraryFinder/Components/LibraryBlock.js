@@ -39,7 +39,7 @@ const LibraryBlock = (props) => {
   overflow='hidden'
   variant='outline'
   minH="300px"
-  maxH="300px"
+  // maxH="300px"
   minW="100%"
 
   backgroundColor={new Date().getHours() >= data.open_time && new Date().getHours() < ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time) ?  'white' : 'red.50'}
@@ -47,48 +47,50 @@ const LibraryBlock = (props) => {
   <Image //pictrue
     minH="300px"
     minW="300px"
-    maxH = "300px"
+    // maxH = "300px"
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
     src={data.image1_link}
     alt='Caffe Latte'
   />
 
-  <Stack>
-    <CardBody>
+  <Stack width='20rem'>
+    <CardBody display='flex' flexDirection='column' gap='2px'>
       <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() < ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time)?  ' ' : 'CLOSED '}</Heading>
       <Heading size='md'>{data.full_name}</Heading>
       {data.open_time}:00 - {data.close_time}:00
       <Text py='2'> 
 {data.short_description}                                           
       </Text>
-    <Stack align='center' isInline='true' justify='center'>
-      <Box>
-        <Box>Loudness</Box>
-        <CircularProgress marginLeft="20px" size="100px" value={data.base_noise_level} color='green.400'>
+      <Box display='flex' flexDirection='row' width='15rem'>
+        <Box display='flex' alignSelf='center' flexDirection='column' alignItems='ceter' justifyContent='center' placeItems='center'>Loudness
+        <CircularProgress size="70px" value={data.base_noise_level} color='green.400'>
         <CircularProgressLabel>{data.base_noise_level}</CircularProgressLabel>
-        </CircularProgress>
-        <Box width={'10px'}></Box>
+        </CircularProgress></Box>
         <Spacer />
-          {data.busyness_info.analysis.venue_live_busyness_available ? "Live ":"Estimated "}
-          Busyness 
-          <CircularProgress marginLeft="20px" size="100px"value={data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness} color={data.busyness_info.analysis.venue_live_busyness_available ? 'green.400' : 'blue.400'}>
+        <Box display='flex' alignSelf='center' flexDirection='column' alignItems='ceter' justifyContent='center' placeItems='center'>
+        {data.busyness_info.analysis.venue_live_busyness_available ? "Live ":"Estimated "}
+          Busyness <CircularProgress size="70px"value={data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness} color={data.busyness_info.analysis.venue_live_busyness_available ? 'green.400' : 'blue.400'}>
             <CircularProgressLabel>{data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness}</CircularProgressLabel>
           </CircularProgress>
         </Box>
-      </Stack>
-<Divider />
+        </Box>
 <HStack marginTop='20px'><Rating readonly initialValue={data.rating} size="15"></Rating>
       <Text color='blue.600' fontSize='1l'>
  {data.total_reviews} Reviews
-      </Text></HStack>
+      </Text>
+      </HStack>
+      <Spacer/>
+      <Button variant='solid' colorScheme='blue' alignSelf='center'>
+        Visit
+      </Button>
     </CardBody>
 
-    <CardFooter>
+    {/* <CardFooter alignSelf='center'>
       <Button variant='solid' colorScheme='blue' alignSelf='center'>
         Vistit
       </Button>
-    </CardFooter>
+    </CardFooter> */}
   
   </Stack>
 </Card>
