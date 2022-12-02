@@ -9,6 +9,7 @@ import {
   Icon,
   useColorModeValue,
   createIcon,
+  useBreakpointValue
 } from '@chakra-ui/react';
 
 export default function CallToActionWithAnnotation() {
@@ -27,19 +28,29 @@ export default function CallToActionWithAnnotation() {
           textAlign={'center'}
           spacing={{ base: 4, md: 14 }}
           py={{ base: 20, md: 10 }}>
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-            lineHeight={'110%'}>
-            find library here <br />
-            <Text  as={'span'} color={'#3B7EA1'}>
-              now
+<Heading fontSize={{ base: '5xl', md: '6xl', lg: '6xl' }}>
+            <Text
+              as={'span'}
+              position={'relative'}
+              _after={{
+                content: "''",
+                width: 'full',
+                height: useBreakpointValue({ base: '20%', md: '30%' }),
+                position: 'absolute',
+                bottom: 1,
+                left: 0,
+                bg: 'blue.400',
+                zIndex: -1,
+              }}>
+              Find Your Perfect Library 
             </Text>
+            <br />{' '}
+            <Text color={'blue.400'} as={'span'}>
+              Here
+            </Text>{' '}
           </Heading>
           <Text color={'gray.500'}>
-            Monetize your content by charging your most loyal readers and reward
-            them loyalty points. Give back to your loyal readers by granting
-            them access to your pre-releases and sneak-peaks.
+           Get your location and adjust the sliders to find the perfect study spot!
           </Text>
           
         </Stack>

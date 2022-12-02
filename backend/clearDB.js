@@ -23,43 +23,7 @@ Review.collection.deleteMany({});
 
 //adding libraries
 const createLibrary = async () => {
-    let kresge = await Library.findOne({name: "kresge"});
-    if (!kresge) {
-        kresge = new Library({
-            name: "kresge",
-            full_name: "Kresge Engineering Library",
-            open_time : 9,
-            close_time : 24,
-            latitude: 37.87388090865484, 
-            longitude : -122.25832257833491,
-            short_description : "The perfect library to last minute grind that cs project",
-            long_description : "The Kresge Engineering Library is a meeting and study hub in the Bechtel Engineering Center. Our extensive collections and services support the research and teaching programs of the College of Engineering and beyond. ",
-            image1_link : "https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-engineering-.jpg.webp?itok=kIqyqIKE",
-            image2_link : "https://lh5.googleusercontent.com/p/AF1QipON-jkYMcZ-fR1qI2x1LqGBhM1fHAVRBhXui5Fu=w408-h306-k-no",
-            base_noise_level: 90,
-            venue_id: "ven_496a6c6172504976315a4c52415968384e7969734234464a496843"
-        })
-        kresge.save()
-    }
-    // adding more libraries
-    let moffit = await Library.findOne({name: "moffit"});
-    if (!moffit) {
-        moffit = new Library({
-            name: "moffit",
-            full_name: "James K. Moffitt Undergraduate Library",
-            open_time: 8,
-            close_time:6,
-            latitude:37.872672419959436,
-            longitude:-122.26056838146692,
-            short_description:"Moffit has the best scene on campus",
-            long_description:"Moffitt Library, located next to Memorial Glade, is one of the busiest libraries on campus. The library includes the Copy Center, Free Speech Movement Café, and convenient access to the collections in the Main (Gardner) Stacks. Reserved for UC Berkeley students and faculty, Moffitt is food- and drink-friendly, serves students of all majors, and is open the longest hours.",
-            image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-moffitt-.jpg.webp?itok=rDFDP0mS",
-            image2_link:"https://static2.gensler.com/uploads/hero_element/11231/thumb_desktop/thumbs/project_MoffittLibrary_1024x576_01_1509396775_1024x576.jpg",
-            base_noise_level: 70,
-            venue_id: "ven_55686b35347473535f383452415968385a4375734557784a496843",
-        })
-        moffit.save()
-    }
+
     let mainstack = await Library.findOne({name: "mainstack"});
     if (!mainstack) {
         mainstack = new Library({
@@ -77,7 +41,9 @@ const createLibrary = async () => {
             venue_id: "ven_385048586949466a2d447552415968393556786f7035514a496843",
         })
         mainstack.save()
+        console.log("added mainstack")
     }
+    
     // let anthropology = await Library.findOne({name: "anthropology"});
     // if (!anthropology) {
     //     anthropology = new Library({
@@ -113,6 +79,7 @@ const createLibrary = async () => {
             venue_id: "ven_55645a645242433332476652415968387044734237596d4a496843"
         })
         business.save()
+        console.log("ad ded business")
     }
     
     let bancroft = await Library.findOne({name: "bancroft"})
@@ -131,6 +98,7 @@ const createLibrary = async () => {
             base_noise_level : 50,
             venue_id: "ven_6b6848532d444c57624541524159683856435343705a6f4a496843"
         })
+        console.log("added bancfot")
         bancroft.save()
     }
     
@@ -138,7 +106,7 @@ const createLibrary = async () => {
     if (!doe) {
         doe = new Library({
             name:"doe",
-            full_name: "Bancroft Library",
+            full_name: "Doe Library",
             open_time:8,
             close_time:16,
             latitude:37.87238039710386,
@@ -150,6 +118,7 @@ const createLibrary = async () => {
             base_noise_level : 50,
             venue_id: "ven_4d433362757470306b4b715241596838526949705851484a496843"
         })
+        console.log("added doe")
         doe.save()
     }
     
@@ -168,10 +137,54 @@ const createLibrary = async () => {
             image2_link:"https://give.lib.berkeley.edu/sites/default/files/inline-images/EALbuilding04.jpg",
             base_noise_level : 60,
             venue_id: "ven_49563459436d73422d656852415968385a6968774351414a496843"
+            
         })
+        
+        console.log("added eastasian")
         eastasian.save()
     }
+    
+    let kresge = await Library.findOne({name: "kresge"});
+    if (!kresge) {
+        kresge = new Library({
+            name: "kresge",
+            full_name: "Kresge Engineering Library",
+            open_time : 9,
+            close_time : 24,
+            latitude: 37.87388090865484, 
+            longitude : -122.25832257833491,
+            short_description : "The perfect library to last minute grind that cs project",
+            long_description : "The Kresge Engineering Library is a meeting and study hub in the Bechtel Engineering Center. Our extensive collections and services support the research and teaching programs of the College of Engineering and beyond. ",
+            image1_link : "https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-engineering-.jpg.webp?itok=kIqyqIKE",
+            image2_link : "https://lh5.googleusercontent.com/p/AF1QipON-jkYMcZ-fR1qI2x1LqGBhM1fHAVRBhXui5Fu=w408-h306-k-no",
+            base_noise_level: 80,
+            venue_id: "ven_496a6c6172504976315a4c52415968384e7969734234464a496843"
+        })
+        console.log("added kresge")
+        kresge.save()
     }
+
+    let moffit = await Library.findOne({name: "moffit"});
+    if (!moffit) {
+        moffit = new Library({
+            name: "moffit",
+            full_name: "James K. Moffitt Undergraduate Library",
+            open_time: 8,
+            close_time:6,
+            latitude:37.872672419959436,
+            longitude:-122.26056838146692,
+            short_description:"Moffit has the best scene on campus",
+            long_description:"Moffitt Library, located next to Memorial Glade, is one of the busiest libraries on campus. The library includes the Copy Center, Free Speech Movement Café, and convenient access to the collections in the Main (Gardner) Stacks. Reserved for UC Berkeley students and faculty, Moffitt is food- and drink-friendly, serves students of all majors, and is open the longest hours.",
+            image1_link:"https://www.lib.berkeley.edu/sites/default/files/styles/library_hours_image/public/2022-03/hours-moffitt-.jpg.webp?itok=rDFDP0mS",
+            image2_link:"https://static2.gensler.com/uploads/hero_element/11231/thumb_desktop/thumbs/project_MoffittLibrary_1024x576_01_1509396775_1024x576.jpg",
+            base_noise_level: 70,
+            venue_id: "ven_55686b35347473535f383452415968385a4375734557784a496843",
+        })
+        console.log("added moffit")
+        moffit.save()
+    }
+    }
+    
     
     createLibrary();
 module.exports = router

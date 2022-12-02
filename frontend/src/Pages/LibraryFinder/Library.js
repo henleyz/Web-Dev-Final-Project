@@ -7,12 +7,14 @@ import { Rating } from "react-simple-star-rating";
 import {
     Box,
     chakra,
+    Spacer,
     Container,
     Stack,
     Text,
     Image,
     Flex,
     VStack,
+    Divider,
     Button,
     Heading,
     SimpleGrid,
@@ -70,7 +72,10 @@ const Library = () => {
           columns={{ base: 1, lg: 2 }}
           spacing={{ base: 8, md: 10 }}
           py={{ base: 18, md: 24 }}>
-          <Flex>
+          <Flex><VStack divider={<StackDivider borderColor='gray.200' />}
+  spacing={10}>
+            
+            <Box>
             <Image
               rounded={'md'}
               alt={'product image'}
@@ -79,7 +84,20 @@ const Library = () => {
               align={'center'}
               w={'100%'}
               h={{ base: '100%', sm: '400px', lg: '500px' }}
-            />
+            /></Box> <HStack>
+        <Box>
+      loudness
+      
+      <CircularProgress marginLeft="20px" size="100px" value={props.base_noise_level} color='green.400'>
+  <CircularProgressLabel>{props.base_noise_level}</CircularProgressLabel>
+</CircularProgress><Box width={'10px'}></Box>
+</Box><Spacer /><Box>{props.busyness_info.analysis.venue_live_busyness_available ? "live ":"estimated "}
+busyness 
+<CircularProgress marginLeft="20px" size="100px"value={props.busyness_info.analysis.venue_live_busyness_available ? props.busyness_info.analysis.venue_live_busyness : props.busyness_info.analysis.venue_forecasted_busyness} color={props.busyness_info.analysis.venue_live_busyness_available ? 'green.400' : 'blue.400'}>
+  <CircularProgressLabel>{props.busyness_info.analysis.venue_live_busyness_available ? props.busyness_info.analysis.venue_live_busyness : props.busyness_info.analysis.venue_forecasted_busyness}</CircularProgressLabel>
+</CircularProgress></Box></HStack>
+
+                        </VStack>
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
             <Box as={'header'}>
@@ -116,50 +134,35 @@ const Library = () => {
                 </Text>
               </VStack>
               <Box>
-                <Text
-                  fontSize={{ base: '16px', lg: '18px' }}
-                  color={'yellow.500'}
-                  fontWeight={'500'}
-                  textTransform={'uppercase'}
-                  mb={'4'}>
-                  Features
-                </Text>
+
   
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-                  <List spacing={2}>
-                    <ListItem>Chronograph</ListItem>
-                    <ListItem>Master Chronometer Certified</ListItem>{' '}
-                    <ListItem>Tachymeter</ListItem>
-                  </List>
-                  <List spacing={2}>
-                    <ListItem>Anti‑magnetic</ListItem>
-                    <ListItem>Chronometer</ListItem>
-                    <ListItem>Small seconds</ListItem>
-                  </List>
-                </SimpleGrid>
+                <HStack marginTop='20px'><Rating readonly initialValue={props.rating}></Rating>
+      <Text color='blue.600' fontSize='2xl'>
+ {props.total_reviews} reviews
+      </Text></HStack>
               </Box>
               <Box>
-                
+                <Image
+              marginTop={"0"}
+              rounded={'md'}
+              alt={'product image'}
+                src={ props.image2_link}
+              fit={'cover'}
+              align={'center'}
+              w={'100%'}
+              h={{ base: '40%', sm: '200px', lg: '200px' }}
+            />  
               </Box>
             </Stack>
   
-            <HStack> loudness
-      <CircularProgress value={props.base_noise_level}  size='120px' color='green.400'>
-  <CircularProgressLabel>{props.base_noise_level}</CircularProgressLabel>
-</CircularProgress>
-busyness
-<CircularProgress value={props.busyness}   size='120px' color='green.400'>
-  <CircularProgressLabel>{props.busyness}</CircularProgressLabel>
-</CircularProgress>
-<Rating readonly initialValue={props.rating}></Rating>
-      <Text color='blue.600' fontSize='2xl'>
-        {props.rating}/5
-      </Text></HStack>
+           
            
           </Stack>
         </SimpleGrid>
         <CustomGoogleMap w='100%' h='500px' lat={props.latitude} long={props.longitude}></CustomGoogleMap>
+        <Box height={"100px"}></Box>
 <Reviews name={id}></Reviews>
+{props.total_reviews} reviews
       </Container>
          </div>
     return <div>{content} </div>

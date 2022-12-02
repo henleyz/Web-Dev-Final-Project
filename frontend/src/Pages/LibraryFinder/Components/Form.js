@@ -51,7 +51,7 @@ function updateSearchParameters(o, b, d, l){
         }, () => {setStatus('unable to get location');});}};
 
     return(
-       <Box minW="300">
+       <Box marginLeft="2%"minW="400" backgroundColor={'blue.100'} padding="50px" borderRadius={"5px"}>
         <Button onClick={getLocation}>get location</Button>
         <Heading>location</Heading>
         <p>{status}</p>

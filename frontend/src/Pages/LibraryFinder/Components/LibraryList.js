@@ -95,7 +95,7 @@ const LibaryList = () => {
             </Show>
            
 
-             <Stack marginLeft="100px" width="100%" marginRight="200px">
+             <Stack marginLeft="50px" width="100%" marginRight="200px" backgroundColor={'gray.100'} borderRadius="10px">
              {/* <Button variant='solid' colorScheme='blue' onClick={getListHelper}>Get Libaries</Button> */}
              {posts}</Stack>
         </Flex>

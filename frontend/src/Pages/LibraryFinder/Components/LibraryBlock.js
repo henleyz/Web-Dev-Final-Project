@@ -1,5 +1,5 @@
 import {   Accordion,Box,  Link,
-  AccordionItem,
+  AccordionItem, Flex, Spacer,
   AccordionButton,
   AccordionPanel,
   AccordionIcon, Card, Progress,
@@ -32,7 +32,7 @@ const LibraryBlock = (props) => {
 
   const content = (data===undefined) ? <div> loading </div> :
   
-<Stack padding={'5'} mineight="300px">
+<Stack padding={'5'}paddingBottom={'0'} minheight="300px" >
 <Link href={hrefLink}>
 <Card 
   direction={{ base: 'column', sm: 'row' }}
@@ -41,7 +41,8 @@ const LibraryBlock = (props) => {
   minH="300px"
   maxH="300px"
   minW="100%"
-  backgroundColor={new Date().getHours() >= data.open_time && new Date().getHours() <= ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time) ?  'white.100' : 'red.50'}
+
+  backgroundColor={new Date().getHours() >= data.open_time && new Date().getHours() < ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time) ?  'white' : 'red.50'}
 >
   <Image //pictrue
     minH="300px"
@@ -55,25 +56,28 @@ const LibraryBlock = (props) => {
 
   <Stack>
     <CardBody>
-      <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() <= ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time)?  ' ' : 'CLOSED '}</Heading>
+      <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() < ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time)?  ' ' : 'CLOSED '}</Heading>
       <Heading size='md'>{data.full_name}</Heading>
       {data.open_time} - {data.close_time}
       <Text py='2'> 
 {data.short_description}                                           
       </Text>
-      <HStack></HStack>
+      <HStack>
+        <Box>
       loudness
-      <CircularProgress value={data.base_noise_level} color='green.400'>
+      
+      <CircularProgress marginLeft="20px" size="100px" value={data.base_noise_level} color='green.400'>
   <CircularProgressLabel>{data.base_noise_level}</CircularProgressLabel>
-</CircularProgress>
-busyness
-<CircularProgress value={data.busyness} color='green.400'>
-  <CircularProgressLabel>{data.busyness}</CircularProgressLabel>
-</CircularProgress>
-<Rating readonly initialValue={data.rating}></Rating>
+</CircularProgress><Box width={'10px'}></Box>
+</Box><Spacer /><Box>{data.busyness_info.analysis.venue_live_busyness_available ? "live ":"estimated "}
+busyness 
+<CircularProgress marginLeft="20px" size="100px"value={data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness} color={data.busyness_info.analysis.venue_live_busyness_available ? 'green.400' : 'blue.400'}>
+  <CircularProgressLabel>{data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness}</CircularProgressLabel>
+</CircularProgress></Box></HStack><Divider />
+<HStack marginTop='20px'><Rating readonly initialValue={data.rating}></Rating>
       <Text color='blue.600' fontSize='2xl'>
-        {data.rating}/5
-      </Text>
+ {data.total_reviews} reviews
+      </Text></HStack>
     </CardBody>
 
     <CardFooter>
@@ -89,7 +93,7 @@ busyness
 
 </Stack>
 
-return <div>{content}</div>
+return <Box>{content}</Box>
 
 }
 export default LibraryBlock;

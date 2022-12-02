@@ -44,7 +44,7 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
         if (library.busyness_info.analysis.venue_live_busyness_available) {
             currentBusy = library.busyness_info.analysis.venue_live_busyness
         } else if (library.busyness_info.analysis.venue_forecast_busyness_available) {
-            currentBusy = library.busyness_info.analysis.venue_forecast_busyness
+            currentBusy = library.busyness_info.analysis.venue_forecasted_busyness
         }
         let quietScore = Math.abs(library.base_noise_level - isQuiet)
         let busyScore = Math.abs(isBusy - currentBusy)
@@ -57,7 +57,9 @@ router.get("/prefer", updateHourAndBusyness, async (req, res) => {
 
     try{
         let libs = await Library.find({})
+        console.log(libs)
         let libKeys = libs.map(x => x.name);
+        console.log(libKeys);
         let libValues = await Promise.all(libs.map(async (x) => await CalculateScore(x)))
         var libmap = libKeys.map(function(e, i) {
             return [e, libValues[i]];
