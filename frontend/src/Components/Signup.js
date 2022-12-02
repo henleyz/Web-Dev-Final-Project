@@ -39,7 +39,23 @@ export default function SignupCard() {
 
   const [showWrong, setShowWrong] = useState(false);
 
-  function postSignupInfo(){
+  async function checkToken() {
+    console.log("checking token")
+    if (window.sessionStorage.getItem('token')) {
+      const res = await axios.get("http://localhost:3000/user/me", {headers: {
+        'token': JSON.parse(window.sessionStorage.getItem('token')).token
+      }}).catch(err => console.log(err));
+      console.log(res)
+      if (res.status === 200) {
+        window.open("/libraries","_self")
+      }
+      else {
+        return false
+      }
+    }
+  }
+
+  function postSignupInfo() {
     console.log(username +  email + password)
     if (!username || !email || !password) {
       console.log("Required!")
@@ -61,16 +77,15 @@ export default function SignupCard() {
       ).catch(err => setShowRequired(s => false) & setShowWrong(s => true));
       console.log(res)
       if (res.status === 200) {
+        sessionStorage.setItem("token", JSON.stringify(res.data))
         window.open("/libraries","_self")
         setShowRequired(s => false);
       }
-
-      // axios.post("http://localhost:3000/user/login", {email: email, password:password}).then(window.open("/libraries","_self"))
-      // setShowRequired(s => false);
     }
   }
 
-  return (
+  return ( 
+    checkToken(),
     <Flex
       minH={'100vh'}
       align={'center'}
