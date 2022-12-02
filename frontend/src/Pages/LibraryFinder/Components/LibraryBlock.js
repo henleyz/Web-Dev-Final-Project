@@ -3,7 +3,7 @@ import {   Accordion,Box,  Link,
   AccordionButton,
   AccordionPanel,
   AccordionIcon, Card, Progress,
-   CardHeader, CircularProgress, CircularProgressLabel, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container, HStack } from '@chakra-ui/react'
+   CardHeader, CircularProgress, CircularProgressLabel, CardBody, CardFooter, Image, Stack, Heading, Button, Divider,ButtonGroup, Container, HStack, Center} from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import CommentBox from './CommentBox.js'
 import {ChatIcon} from '@chakra-ui/icons'
@@ -58,36 +58,42 @@ const LibraryBlock = (props) => {
     <CardBody>
       <Heading size='md' color="red">{new Date().getHours() >= data.open_time && new Date().getHours() < ((data.close_time < data.open_time) ? data.close_time+24 : data.close_time)?  ' ' : 'CLOSED '}</Heading>
       <Heading size='md'>{data.full_name}</Heading>
-      {data.open_time} - {data.close_time}
+      {data.open_time}:00 - {data.close_time}:00
       <Text py='2'> 
 {data.short_description}                                           
       </Text>
-      <HStack>
-        <Box>
-      loudness
-      
-      <CircularProgress marginLeft="20px" size="100px" value={data.base_noise_level} color='green.400'>
-  <CircularProgressLabel>{data.base_noise_level}</CircularProgressLabel>
-</CircularProgress><Box width={'10px'}></Box>
-</Box><Spacer /><Box>{data.busyness_info.analysis.venue_live_busyness_available ? "live ":"estimated "}
-busyness 
-<CircularProgress marginLeft="20px" size="100px"value={data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness} color={data.busyness_info.analysis.venue_live_busyness_available ? 'green.400' : 'blue.400'}>
-  <CircularProgressLabel>{data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness}</CircularProgressLabel>
-</CircularProgress></Box></HStack><Divider />
-<HStack marginTop='20px'><Rating readonly initialValue={data.rating}></Rating>
-      <Text color='blue.600' fontSize='2xl'>
- {data.total_reviews} reviews
+    <Stack align='center' isInline='true' justify='center'>
+      <Box>
+        <Box>Loudness</Box>
+        <CircularProgress marginLeft="20px" size="100px" value={data.base_noise_level} color='green.400'>
+        <CircularProgressLabel>{data.base_noise_level}</CircularProgressLabel>
+        </CircularProgress>
+        <Box width={'10px'}></Box>
+        <Spacer />
+          {data.busyness_info.analysis.venue_live_busyness_available ? "Live ":"Estimated "}
+          Busyness 
+          <CircularProgress marginLeft="20px" size="100px"value={data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness} color={data.busyness_info.analysis.venue_live_busyness_available ? 'green.400' : 'blue.400'}>
+            <CircularProgressLabel>{data.busyness_info.analysis.venue_live_busyness_available ? data.busyness_info.analysis.venue_live_busyness : data.busyness_info.analysis.venue_forecasted_busyness}</CircularProgressLabel>
+          </CircularProgress>
+        </Box>
+      </Stack>
+<Divider />
+<HStack marginTop='20px'><Rating readonly initialValue={data.rating} size="15"></Rating>
+      <Text color='blue.600' fontSize='1l'>
+ {data.total_reviews} Reviews
       </Text></HStack>
     </CardBody>
 
     <CardFooter>
-      <Button variant='solid' colorScheme='blue'>
-        vistit
+      <Button variant='solid' colorScheme='blue' alignSelf='center'>
+        Vistit
       </Button>
     </CardFooter>
   
   </Stack>
-</Card></Link>
+</Card>
+
+</Link>
 
 
 

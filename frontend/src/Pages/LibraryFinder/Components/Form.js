@@ -51,20 +51,21 @@ function updateSearchParameters(o, b, d, l){
         }, () => {setStatus('unable to get location');});}};
 
     return(
-       <Box marginLeft="2%"minW="400" backgroundColor={'blue.100'} padding="50px" borderRadius={"5px"}>
-        <Button onClick={getLocation}>get location</Button>
-        <Heading>location</Heading>
+       <Box marginLeft="2%" minW="400" backgroundColor={'blue.100'} padding="50px" borderRadius={"5px"} display="flex" flexDirection="column"
+       alignContent="space-between" alignItems="stretch" gap="20px">
+        <Button onClick={getLocation}>Get Location</Button>
+        <Heading alignSelf="center">Location</Heading>
         <p>{status}</p>
         {lat && <p>Latitude: {lat}</p>}
         {lng && <p>Longitude: {lng}</p>}
         <Checkbox defaultChecked onChange={(e) => setOpen(e.target.checked)}>Is Open</Checkbox>
-<Box>Loudness <SliderMarkExample returnValue={setLoud} begin="silent" middle="lively" end="loud"></SliderMarkExample>
+<Box>Loudness <SliderMarkExample returnValue={setLoud} begin="Silent" middle="Lively" end="Loud"></SliderMarkExample>
 </Box>
-<Box>Distance <SliderMarkExample returnValue={setDistance} begin="lazy" middle="walkable" end="bikable"></SliderMarkExample>
+<Box>Distance <SliderMarkExample returnValue={setDistance} begin="Close" middle="Walkable" end="Bikable"></SliderMarkExample>
 </Box>
-<Box>Busyness <SliderMarkExample returnValue={setBusy} begin="empty" middle="average" end="good luck finding a seat"></SliderMarkExample>
+<Box>Busyness <SliderMarkExample returnValue={setBusy} begin="Empty" middle="Average" end="Full"></SliderMarkExample>
 </Box>
-<Button onClick={applyAndClose}>Apply FIlters</Button>
+<Button onClick={applyAndClose}>Apply Filters</Button>
 
         </Box> 
     )
