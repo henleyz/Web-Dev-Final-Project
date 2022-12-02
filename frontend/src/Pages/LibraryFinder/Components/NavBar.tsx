@@ -76,7 +76,7 @@ import {
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'#'}>
+              href={'/login'}>
               Sign In
             </Button>
             <Button
@@ -87,7 +87,8 @@ import {
               bg={'#3B7EA1'}
               _hover={{
                 bg: '#3B7EA1',
-              }}>
+              }}
+              >
               Sign Up
             </Button>
           </Stack>

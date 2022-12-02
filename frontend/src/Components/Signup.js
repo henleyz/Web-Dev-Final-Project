@@ -35,18 +35,39 @@ export default function SignupCard() {
 
   const [username, setUsername] = useState(false);
 
+  const [showRequired, setShowRequired] = useState(false);
+
+  const [showWrong, setShowWrong] = useState(false);
 
   function postSignupInfo(){
-
     console.log(username +  email + password)
-    axios.post("http://localhost:3000/user/signup", {username: username, email: email, password:password}).then(window.open("/libraries","_self"))
-    
+    if (!username || !email || !password) {
+      console.log("Required!")
+      setShowRequired(s => true);
+    } else {
+      axios.post("http://localhost:3000/user/signup", {username: username, email: email, password:password}).then(window.open("/libraries","_self"))
+      setShowRequired(s => false);
+    }
   }
   
-  function postLoginInfo(){
+  async function postLoginInfo(){
+    console.log(email + password)
+    if (!email || !password) {
+      console.log("please fill the required!")
+      setShowRequired(s => true);
+    }
+     else {
+      const res = await axios.post("http://localhost:3000/user/login", {email: email, password:password}
+      ).catch(err => setShowRequired(s => false) & setShowWrong(s => true));
+      console.log(res)
+      if (res.status === 200) {
+        window.open("/libraries","_self")
+        setShowRequired(s => false);
+      }
 
-    console.log(username +  email + password)
-    axios.post("http://localhost:3000/user/login", {username: username, email: email, password:password}).then(window.open("/libraries","_self"))
+      // axios.post("http://localhost:3000/user/login", {email: email, password:password}).then(window.open("/libraries","_self"))
+      // setShowRequired(s => false);
+    }
   }
 
   return (
@@ -58,27 +79,30 @@ export default function SignupCard() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
+            Sign Up
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to see which library you should go to today
+            To see which library you should go to today
           </Text>
         </Stack>
+        <Box color={'red.700'} alignSelf='center'>
+          {showRequired ? <p>Please fill in the required!</p> : null}
+          {showWrong ? <p>Please enter correct information!</p> : null}
+        </Box>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}>
-    
           <Stack spacing={4}>
             <HStack>
             <FormControl id="Username" isRequired>
-              <FormLabel>User name</FormLabel>
+              <FormLabel>User Name</FormLabel>
               <Input type="text"  onChange={event => setUsername(event.currentTarget.value)}/>
             </FormControl>
             </HStack>
             <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>Email Address</FormLabel>
               <Input type="email"  onChange={event => setEmail(event.currentTarget.value)}/>
             </FormControl>
             <FormControl id="password" isRequired>
@@ -105,7 +129,7 @@ export default function SignupCard() {
                 _hover={{
                   bg: 'blue.500',
                 }}>
-                Sign up
+                Sign Up
               </Button>
               <Button onClick={postLoginInfo}
                 loadingText="Submitting"
@@ -115,7 +139,7 @@ export default function SignupCard() {
                 _hover={{
                   bg: 'gray.500',
                 }}>
-                login
+                Login
               </Button>
             </Stack>
           </Stack>
