@@ -84,7 +84,7 @@ const Reviews = (props) => {
         console.log(body)
         axios.post("https://library-finder-backend.onrender.com/review/post?library="+ LibraryName +"&title="+title +"&body=" + body + "&rate=" + rattting
         
-        , {library: LibraryName, title: title, body:body, rate:rattting}).then(window.location.reload(false))
+        , {library: LibraryName, title: title, body:body, rate:rattting}).then(() => new Promise(resolve => setTimeout(resolve, 1000))).then(window.location.reload(false))
 
         
     }
