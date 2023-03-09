@@ -94,7 +94,7 @@ const Reviews = (props) => {
     const getReviews = () => {
         setList([]);
         console.log("oski")
-        axios.get("http://localhost:3000/review/",{params:{library:props.name}})
+        axios.get("https://library-finder-backend.onrender.com/review/",{params:{library:props.name}})
         .then((body) => setData(body.data))
        .catch((error) => console.log(error));
        
