@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MONGOURI = "mongodb://127.0.0.1:27017/test";
+const MONGOURI = "mongodb+srv://henley:puff@libraryfinderdb.xnhkwbc.mongodb.net/?retryWrites=true&w=majority";
 const InitiateMongoServer = async () => {
     try {
         await mongoose.connect(MONGOURI, {
