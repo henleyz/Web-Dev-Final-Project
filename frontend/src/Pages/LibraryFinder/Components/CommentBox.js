@@ -8,7 +8,7 @@ const Comments = ({ postId, comments: initialComments }) => {
   const handleSubmitComment = () => {
     console.log(newComment)
 
-    axios.post("http://localhost:3002/post/" + postId + "/comment", { newComment }).then((res) => {
+    axios.post("https://library-finder-backend.onrender.com/post/" + postId + "/comment", { newComment }).then((res) => {
       let temp  = [...comments]
       temp.push(newComment);
       setComments(temp);
