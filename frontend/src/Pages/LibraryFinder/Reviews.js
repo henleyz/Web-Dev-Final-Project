@@ -82,7 +82,7 @@ const Reviews = (props) => {
         console.log(rattting)
         console.log(title)
         console.log(body)
-        axios.post("http://localhost:3000/review/post/?library="+ LibraryName +"&title="+title +"&body=" + body + "&rate=" + rattting
+        axios.post("https://library-finder-backend.onrender.com/review/post/?library="+ LibraryName +"&title="+title +"&body=" + body + "&rate=" + rattting
         
         , {library: LibraryName, title: title, body:body, rate:rattting}).then(window.location.reload(false))
 
