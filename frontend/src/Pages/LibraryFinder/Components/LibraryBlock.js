@@ -19,7 +19,7 @@ const LibraryBlock = (props) => {
 
   const getData = () => {
 
-    axios.get("http://localhost:3000/library/", {params:{libname: props.name }}).then((body) => (SetData(body.data))).then(setloading(false)).catch((error) => console.log(error))
+    axios.get("https://library-finder-backend.onrender.com/library/", {params:{libname: props.name }}).then((body) => (SetData(body.data))).then(setloading(false)).catch((error) => console.log(error))
     if (data === undefined) {
       return (<div></div>)
     }
