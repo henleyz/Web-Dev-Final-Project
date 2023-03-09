@@ -57,7 +57,7 @@ const Library = () => {
     const { id } = useParams();
     const [props, SetData] = useState();
     const getData = () =>{
-          axios.get("http://localhost:3000/library/", {params:{libname:id}}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
+          axios.get("https://library-finder-backend.onrender.com/library/", {params:{libname:id}}).then(setloading(false)).then((body) => (SetData(body.data))).catch((error) => console.log(error))
 
     }
     
