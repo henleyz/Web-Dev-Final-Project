@@ -12,7 +12,7 @@ module.exports = async function(req, res, next){
         return
     } else {
         await forEach(libs, async function(library) {
-            let busy_info = await fetch(`http://localhost:3000/busyness?libname=${library.name}`).then(res => res.json())
+            let busy_info = await fetch(`https://library-finder-backend.onrender.com/busyness?libname=${library.name}`).then(res => res.json())
             let open_time = library.open_time
             let close_time = library.close_time
             let current = now
