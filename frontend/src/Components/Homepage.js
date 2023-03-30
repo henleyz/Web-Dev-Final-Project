@@ -39,6 +39,7 @@ export default function SplitScreen() {
           An online platform that collects information about libraries across 
           UC Berkeley's campus and recommends you a selection of choices 
           based on your preferences.
+          Note: This project is hosted on a free render.com server, so give the backend about 5 minutes to startup!
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Link href='/login'><Button
